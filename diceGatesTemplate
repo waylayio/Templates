@@ -1,0 +1,426 @@
+{
+  "posterior": [
+    {
+      "nodes": [
+        "ORGate_1",
+        "diceSensor_1",
+        "diceSensor_2"
+      ],
+      "function": [
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "nodes": [
+        "ANDGate_1",
+        "diceSensor_1",
+        "diceSensor_2"
+      ],
+      "function": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "nodes": [
+        "Gate_1",
+        "diceSensor_1",
+        "diceSensor_2"
+      ],
+      "function": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "states": [
+        "ONE",
+        "TWO",
+        "THREE",
+        "FOUR",
+        "FIVE",
+        "SIX"
+      ],
+      "name": "diceSensor_1",
+      "properties": {
+        "position": [
+          167,
+          264
+        ],
+        "comment": "created by waylay",
+        "sensor": {
+          "name": "diceSensor",
+          "version": "1.0.4",
+          "label": "diceSensor_1",
+          "requiredProperties": []
+        }
+      },
+      "type": "discrete",
+      "mode": "nature",
+      "priors": [
+        0.16666666666666666,
+        0.16666666666666666,
+        0.16666666666666666,
+        0.16666666666666666,
+        0.16666666666666666,
+        0.16666666666666666
+      ]
+    },
+    {
+      "states": [
+        "ONE",
+        "TWO",
+        "THREE",
+        "FOUR",
+        "FIVE",
+        "SIX"
+      ],
+      "name": "diceSensor_2",
+      "properties": {
+        "position": [
+          197,
+          468
+        ],
+        "comment": "created by waylay",
+        "sensor": {
+          "name": "diceSensor",
+          "version": "1.0.4",
+          "label": "diceSensor_2",
+          "requiredProperties": []
+        }
+      },
+      "type": "discrete",
+      "mode": "nature",
+      "priors": [
+        0.16666666666666666,
+        0.16666666666666666,
+        0.16666666666666666,
+        0.16666666666666666,
+        0.16666666666666666,
+        0.16666666666666666
+      ]
+    },
+    {
+      "states": [
+        "TRUE",
+        "FALSE"
+      ],
+      "name": "ORGate_1",
+      "properties": {
+        "position": [
+          371,
+          350
+        ],
+        "comment": "created by waylay",
+        "actions": [
+          {
+            "name": "alarmDialog",
+            "version": "0.0.3",
+            "label": "alarmDialog_OR",
+            "position": [
+              672,
+              401
+            ],
+            "requiredProperties": [
+              {
+                "message": "OR GATE  , "
+              }
+            ],
+            "triggeredStates": [
+              "TRUE"
+            ],
+            "actionPolicy": 0
+          }
+        ]
+      },
+      "type": "discrete",
+      "mode": "nature"
+    },
+    {
+      "states": [
+        "TRUE",
+        "FALSE"
+      ],
+      "name": "ANDGate_1",
+      "properties": {
+        "position": [
+          364,
+          185
+        ],
+        "comment": "created by waylay",
+        "actions": [
+          {
+            "name": "alarmDialog",
+            "version": "0.0.3",
+            "label": "alarmDialog_1",
+            "position": [
+              623,
+              227
+            ],
+            "requiredProperties": [
+              {
+                "message": "AND GATE  , "
+              }
+            ],
+            "triggeredStates": [
+              "TRUE"
+            ],
+            "actionPolicy": 0
+          }
+        ]
+      },
+      "type": "discrete",
+      "mode": "nature"
+    },
+    {
+      "states": [
+        "TRUE",
+        "FALSE"
+      ],
+      "name": "Gate_1",
+      "properties": {
+        "position": [
+          389,
+          467
+        ],
+        "comment": "created by waylay",
+        "actions": [
+          {
+            "name": "alarmDialog",
+            "version": "0.0.3",
+            "label": "alarmDialog_GATE",
+            "position": [
+              687,
+              561
+            ],
+            "requiredProperties": [
+              {
+                "message": "General GATE  , "
+              }
+            ],
+            "triggeredStates": [
+              "TRUE"
+            ],
+            "actionPolicy": 0
+          }
+        ]
+      },
+      "type": "discrete",
+      "mode": "nature"
+    }
+  ],
+  "name": "template.name"
+}
