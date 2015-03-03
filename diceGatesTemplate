@@ -336,7 +336,7 @@
             ],
             "requiredProperties": [
               {
-                "message": "OR GATE. rnd1 is <diceSensor_1.randomValue>, rnd2 is <diceSensor_2.randomValue>"
+                "message": "OR GATE rnd1 is <diceSensor_1.randomValue>, rnd2 is <diceSensor_2.randomValue>"
               }
             ],
             "triggeredStates": [
@@ -372,7 +372,7 @@
             ],
             "requiredProperties": [
               {
-                "message": "AND GATE. rnd1 is <diceSensor_1.randomValue>, rnd2 is <diceSensor_2.randomValue>"
+                "message": "AND GATE rnd1 is <diceSensor_1.randomValue>, rnd2 is <diceSensor_2.randomValue>"
               }
             ],
             "triggeredStates": [
@@ -408,7 +408,7 @@
             ],
             "requiredProperties": [
               {
-                "message": "General GATE. rnd1 is <diceSensor_1.randomValue>, rnd2 is <diceSensor_2.randomValue>"
+                "message": "General GATE rnd1 is <diceSensor_1.randomValue>, rnd2 is <diceSensor_2.randomValue>"
               }
             ],
             "triggeredStates": [
