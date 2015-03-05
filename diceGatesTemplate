@@ -263,7 +263,7 @@
         "comment": "created by waylay",
         "sensor": {
           "name": "diceSensor",
-          "version": "1.0.4",
+          "version": "1.0.1",
           "label": "diceSensor_1",
           "requiredProperties": []
         }
@@ -297,7 +297,7 @@
         "comment": "created by waylay",
         "sensor": {
           "name": "diceSensor",
-          "version": "1.0.4",
+          "version": "1.0.1",
           "label": "diceSensor_2",
           "requiredProperties": []
         }
@@ -328,7 +328,7 @@
         "actions": [
           {
             "name": "alarmDialog",
-            "version": "0.0.3",
+            "version": "1.0.1",
             "label": "alarmDialog_OR",
             "position": [
               672,
@@ -364,7 +364,7 @@
         "actions": [
           {
             "name": "alarmDialog",
-            "version": "0.0.3",
+            "version": "1.0.1",
             "label": "alarmDialog_1",
             "position": [
               623,
@@ -400,7 +400,7 @@
         "actions": [
           {
             "name": "alarmDialog",
-            "version": "0.0.3",
+            "version": "1.0.1",
             "label": "alarmDialog_GATE",
             "position": [
               687,
