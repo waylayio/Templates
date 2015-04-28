@@ -263,7 +263,7 @@
         ],
         "comment": "created by waylay",
         "sensor": {
-          "name": "diceSensor",
+          "name": "dice",
           "version": "1.0.1",
           "label": "diceSensor_1",
           "requiredProperties": []
@@ -297,7 +297,7 @@
         ],
         "comment": "created by waylay",
         "sensor": {
-          "name": "diceSensor",
+          "name": "dice",
           "version": "1.0.1",
           "label": "diceSensor_2",
           "requiredProperties": []
