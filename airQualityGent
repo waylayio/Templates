@@ -1,233 +1,237 @@
 {
-    "name": "airQualityGent",
-    "posterior": [
-        {
-            "nodes": [
-                "ORGate_2",
-                "BETE716",
-                "BETR710",
-                "BETR702",
-                "BETR701"
-            ],
-            "function": [
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                1
-            ]
+  "name": "airQualityGent",
+  "posterior": [
+    {
+      "nodes": [
+        "ORGate",
+        "BETE716",
+        "BETR710",
+        "BETR702",
+        "BETR701"
+      ],
+      "function": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "states": [
+        "Above",
+        "Below"
+      ],
+      "name": "BETE716",
+      "properties": {
+        "position": [
+          217,
+          126
+        ],
+        "tickTrigger": true,
+        "dataTrigger": true,
+        "cost": 1,
+        "sensor": {
+          "name": "xivelyGetLatestValue",
+          "version": "1.0.1",
+          "label": "BETE716",
+          "requiredProperties": [
+            {
+              "feed": "14176660"
+            },
+            {
+              "threshold": "100"
+            },
+            {
+              "id": "NO"
+            }
+          ]
         }
-    ],
-    "nodes": [
-        {
-            "states": [
-                "Above",
-                "Below"
-            ],
-            "name": "BETR702",
-            "properties": {
-                "position": [
-                    115,
-                    318
-                ],
-                "tickTrigger": true,
-                "dataTrigger": true,
-                "sensor": {
-                    "name": "xivelyGetLatestValue",
-                    "version": "1.0.1",
-                    "label": "BETR702",
-                    "requiredProperties": [
-                        {
-                            "feed": "415160965"
-                        },
-                        {
-                            "id": "PM2_5"
-                        },
-                        {
-                            "threshold": "100"
-                        }
-                    ]
-                }
+      },
+      "type": "discrete",
+      "mode": "nature",
+      "priors": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "states": [
+        "Above",
+        "Below"
+      ],
+      "name": "BETR701",
+      "properties": {
+        "position": [
+          288,
+          392
+        ],
+        "tickTrigger": true,
+        "dataTrigger": true,
+        "cost": 1,
+        "sensor": {
+          "name": "xivelyGetLatestValue",
+          "version": "1.0.1",
+          "label": "BETR701",
+          "requiredProperties": [
+            {
+              "feed": "2005839140"
             },
-            "type": "discrete",
-            "mode": "nature",
-            "priors": [
-                0.5,
-                0.5
-            ]
-        },
-        {
-            "states": [
-                "Above",
-                "Below"
-            ],
-            "name": "BETE716",
-            "properties": {
-                "position": [
-                    217,
-                    126
-                ],
-                "tickTrigger": true,
-                "dataTrigger": true,
-                "sensor": {
-                    "name": "xivelyGetLatestValue",
-                    "version": "1.0.1",
-                    "label": "BETE716",
-                    "requiredProperties": [
-                        {
-                            "feed": "14176660"
-                        },
-                        {
-                            "id": "NO"
-                        },
-                        {
-                            "threshold": "100"
-                        }
-                    ]
-                }
+            {
+              "threshold": "100"
             },
-            "type": "discrete",
-            "mode": "nature",
-            "priors": [
-                0.5,
-                0.5
-            ]
-        },
-        {
-            "states": [
-                "Above",
-                "Below"
-            ],
-            "name": "BETR710",
-            "properties": {
-                "position": [
-                    106,
-                    195
-                ],
-                "tickTrigger": true,
-                "dataTrigger": true,
-                "sensor": {
-                    "name": "xivelyGetLatestValue",
-                    "version": "1.0.1",
-                    "label": "BETR710",
-                    "requiredProperties": [
-                        {
-                            "feed": "991877222"
-                        },
-                        {
-                            "id": "PM10"
-                        },
-                        {
-                            "threshold": "100"
-                        }
-                    ]
-                }
-            },
-            "type": "discrete",
-            "mode": "nature",
-            "priors": [
-                0.5,
-                0.5
-            ]
-        },
-        {
-            "states": [
-                "Above",
-                "Below"
-            ],
-            "name": "BETR701",
-            "properties": {
-                "position": [
-                    288,
-                    392
-                ],
-                "tickTrigger": true,
-                "dataTrigger": true,
-                "sensor": {
-                    "name": "xivelyGetLatestValue",
-                    "version": "1.0.1",
-                    "label": "BETR701",
-                    "requiredProperties": [
-                        {
-                            "feed": "2005839140"
-                        },
-                        {
-                            "id": "PM2_5"
-                        },
-                        {
-                            "threshold": "100"
-                        }
-                    ]
-                }
-            },
-            "type": "discrete",
-            "mode": "nature",
-            "priors": [
-                0.5,
-                0.5
-            ]
-        },
-        {
-            "states": [
-                "TRUE",
-                "FALSE"
-            ],
-            "name": "ORGate_2",
-            "properties": {
-                "position": [
-                    340,
-                    226
-                ],
-                "actions": [
-                    {
-                        "name": "sendTweet",
-                        "version": "1.0.3",
-                        "label": "tweetBadAirQuality",
-                        "position": [
-                            483,
-                            136
-                        ],
-                        "requiredProperties": [
-                            {
-                                "message": "Current air quality in Gent is bad!\n"
-                            }
-                        ],
-                        "triggeredStates": [
-                            "TRUE"
-                        ],
-                        "actionPolicy": 0
-                    }
-                ]
-            },
-            "type": "discrete",
-            "mode": "nature"
+            {
+              "id": "PM2_5"
+            }
+          ]
         }
-    ]
+      },
+      "type": "discrete",
+      "mode": "nature",
+      "priors": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "states": [
+        "Above",
+        "Below"
+      ],
+      "name": "BETR702",
+      "properties": {
+        "position": [
+          115,
+          318
+        ],
+        "tickTrigger": true,
+        "dataTrigger": true,
+        "cost": 1,
+        "sensor": {
+          "name": "xivelyGetLatestValue",
+          "version": "1.0.1",
+          "label": "BETR702",
+          "requiredProperties": [
+            {
+              "feed": "415160965"
+            },
+            {
+              "threshold": "100"
+            },
+            {
+              "id": "PM2_5"
+            }
+          ]
+        }
+      },
+      "type": "discrete",
+      "mode": "nature",
+      "priors": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "states": [
+        "Above",
+        "Below"
+      ],
+      "name": "BETR710",
+      "properties": {
+        "position": [
+          106,
+          195
+        ],
+        "tickTrigger": true,
+        "dataTrigger": true,
+        "cost": 1,
+        "sensor": {
+          "name": "xivelyGetLatestValue",
+          "version": "1.0.1",
+          "label": "BETR710",
+          "requiredProperties": [
+            {
+              "feed": "991877222"
+            },
+            {
+              "threshold": "100"
+            },
+            {
+              "id": "PM10"
+            }
+          ]
+        }
+      },
+      "type": "discrete",
+      "mode": "nature",
+      "priors": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "states": [
+        "TRUE",
+        "FALSE"
+      ],
+      "name": "ORGate",
+      "properties": {
+        "position": [
+          340,
+          226
+        ],
+        "actions": [
+          {
+            "name": "sendTweet",
+            "version": "1.0.3",
+            "label": "tweetBadAirQuality",
+            "position": [
+              483,
+              136
+            ],
+            "requiredProperties": [
+              {
+                "message": "Current air quality in Gent is bad!\n"
+              }
+            ],
+            "triggeredStates": [
+              "TRUE"
+            ],
+            "actionPolicy": 0
+          }
+        ]
+      },
+      "type": "discrete",
+      "mode": "nature"
+    }
+  ]
 }
