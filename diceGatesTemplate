@@ -1,5 +1,12 @@
 {
-  "video_url" : "https://www.youtube.com/embed/8o6Agbzv2HM",
+  metadata: {
+    "videoURL" : "https://www.youtube.com/embed/8o6Agbzv2HM",
+    "info : [ {
+            "x" : 35,
+            "y" : 35,
+            "text" : "This is info node"
+      }]
+    },
   "posterior": [
     {
       "nodes": [
