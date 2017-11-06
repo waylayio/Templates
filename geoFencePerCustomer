@@ -166,7 +166,7 @@
         "cost": 1,
         "sensor": {
           "name": "getGeoFenceListForType",
-          "version": "0.0.4",
+          "version": "0.0.5",
           "label": "getGeoFenceListForType_1",
           "requiredProperties": [
             {
