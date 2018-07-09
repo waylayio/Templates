@@ -1,0 +1,265 @@
+{
+  "metadata": {
+    "infoBoxes": [
+      {
+        "x": 413,
+        "y": 141,
+        "text": "Demo with control gates"
+      }
+    ]
+  },
+  "posterior": [
+    {
+      "nodes": [
+        "AboveAndGoodWeather",
+        "BothAbove",
+        "currentWeather_1"
+      ],
+      "function": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "nodes": [
+        "BothAbove",
+        "streamingDataSensor_1",
+        "streamingDataSensor_2"
+      ],
+      "function": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "states": [
+        "TRUE",
+        "FALSE"
+      ],
+      "name": "AboveAndGoodWeather",
+      "properties": {
+        "position": [
+          634,
+          389
+        ],
+        "cost": 1,
+        "actions": [
+          {
+            "name": "debugDialog",
+            "version": "1.0.4",
+            "label": "GreatWeather",
+            "position": [
+              772,
+              263
+            ],
+            "requiredProperties": [
+              {
+                "message": "sensor1 temp: {{streamingDataSensor_1.parameter}}, sensor2 temp:{{streamingDataSensor_2.parameter}},\noutside weather temp: {{currentWeather_1.temperature}}"
+              }
+            ],
+            "triggeredStates": [
+              "TRUE"
+            ],
+            "actionPolicy": 0
+          }
+        ]
+      },
+      "type": "discrete",
+      "mode": "nature"
+    },
+    {
+      "states": [
+        "TRUE",
+        "FALSE"
+      ],
+      "name": "BothAbove",
+      "properties": {
+        "position": [
+          444,
+          303
+        ],
+        "cost": 1
+      },
+      "type": "discrete",
+      "mode": "nature"
+    },
+    {
+      "states": [
+        "Clouds",
+        "Clear",
+        "Storm",
+        "Rain",
+        "Mist",
+        "Fog",
+        "Haze",
+        "Snow",
+        "Drizzle"
+      ],
+      "name": "currentWeather_1",
+      "properties": {
+        "position": [
+          449,
+          498
+        ],
+        "tickTrigger": true,
+        "dataTrigger": true,
+        "cost": 1,
+        "pollingPeriod": 300000,
+        "sensor": {
+          "name": "currentWeather",
+          "version": "1.0.8",
+          "label": "currentWeather_1",
+          "requiredProperties": [
+            {
+              "city": "Gent"
+            }
+          ]
+        }
+      },
+      "type": "discrete",
+      "mode": "nature",
+      "priors": [
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111,
+        0.1111111111111111
+      ]
+    },
+    {
+      "states": [
+        "Below",
+        "Equal",
+        "Above"
+      ],
+      "name": "streamingDataSensor_1",
+      "properties": {
+        "position": [
+          199,
+          218
+        ],
+        "tickTrigger": true,
+        "dataTrigger": true,
+        "cost": 1,
+        "resource": "testresource1",
+        "evictionTime": 15000,
+        "sensor": {
+          "name": "streamingDataSensor",
+          "version": "1.1.3",
+          "label": "streamingDataSensor_1",
+          "requiredProperties": [
+            {
+              "parameter": "temperature"
+            },
+            {
+              "threshold": "21"
+            }
+          ]
+        }
+      },
+      "type": "discrete",
+      "mode": "nature",
+      "priors": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ]
+    },
+    {
+      "states": [
+        "Below",
+        "Equal",
+        "Above"
+      ],
+      "name": "streamingDataSensor_2",
+      "properties": {
+        "position": [
+          203,
+          395
+        ],
+        "tickTrigger": true,
+        "dataTrigger": true,
+        "cost": 1,
+        "resource": "testresource2",
+        "evictionTime": 15000,
+        "sensor": {
+          "name": "streamingDataSensor",
+          "version": "1.1.3",
+          "label": "streamingDataSensor_2",
+          "requiredProperties": [
+            {
+              "parameter": "temperature"
+            },
+            {
+              "threshold": "21"
+            }
+          ]
+        }
+      },
+      "type": "discrete",
+      "mode": "nature",
+      "priors": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ]
+    }
+  ],
+  "name": "StreamControlUsingGates"
+}
