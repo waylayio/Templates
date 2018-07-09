@@ -20,7 +20,7 @@
         "dataTrigger": true,
         "cost": 1,
         "sensor": {
-          "name": "diceSensor",
+          "name": "dice",
           "version": "1.0.1",
           "label": "diceSensor_1",
           "requiredProperties": []
@@ -56,7 +56,7 @@
         "dataTrigger": true,
         "cost": 1,
         "sensor": {
-          "name": "diceSensor",
+          "name": "dice",
           "version": "1.0.1",
           "label": "diceSensor_2",
           "requiredProperties": []
@@ -92,7 +92,7 @@
         "dataTrigger": true,
         "cost": 1,
         "sensor": {
-          "name": "diceSensor",
+          "name": "dice",
           "version": "1.0.1",
           "label": "diceSensor_3",
           "requiredProperties": []
