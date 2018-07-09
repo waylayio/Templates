@@ -253,7 +253,7 @@
         "resource": "$",
         "sensor": {
           "name": "streamingRangeSensor",
-          "version": "1.0.6",
+          "version": "1.0.4",
           "label": "Hypertension",
           "requiredProperties": [
             {
@@ -388,7 +388,7 @@
         "resource": "$",
         "sensor": {
           "name": "streamingRangeSensor",
-          "version": "1.0.6",
+          "version": "1.0.4",
           "label": "SBP",
           "requiredProperties": [
             {
@@ -693,7 +693,7 @@
         "resource": "$",
         "sensor": {
           "name": "streamingRangeSensor",
-          "version": "1.0.6",
+          "version": "1.0.4",
           "label": "WBC",
           "requiredProperties": [
             {
@@ -734,7 +734,7 @@
         "resource": "$",
         "sensor": {
           "name": "streamingRangeSensor",
-          "version": "1.0.6",
+          "version": "1.0.4",
           "label": "heartRate",
           "requiredProperties": [
             {
@@ -775,7 +775,7 @@
         "resource": "$",
         "sensor": {
           "name": "streamingRangeSensor",
-          "version": "1.0.6",
+          "version": "1.0.4",
           "label": "respiratoryRate",
           "requiredProperties": [
             {
@@ -816,7 +816,7 @@
         "resource": "$",
         "sensor": {
           "name": "streamingRangeSensor",
-          "version": "1.0.6",
+          "version": "1.0.4",
           "label": "temperature",
           "requiredProperties": [
             {
