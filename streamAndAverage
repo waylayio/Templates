@@ -158,7 +158,7 @@
         "evictionTime": 1000,
         "sensor": {
           "name": "getAverageFromTS",
-          "version": "0.0.1",
+          "version": "1.0.1",
           "label": "getAverageFromTS_1",
           "requiredProperties": [
             {
