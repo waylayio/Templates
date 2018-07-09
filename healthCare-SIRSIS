@@ -331,7 +331,7 @@
         "resource": "$",
         "sensor": {
           "name": "streamingRangeSensor",
-          "version": "1.0.6",
+          "version": "1.0.4",
           "label": "PaC02",
           "requiredProperties": [
             {
