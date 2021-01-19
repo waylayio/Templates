@@ -1,0 +1,528 @@
+{
+  "sensors": [
+    {
+      "label": "Bingo",
+      "name": "debugDialog",
+      "version": "1.0.0",
+      "properties": {
+        "message": "Bingo"
+      },
+      "sequence": 0,
+      "position": [
+        674,
+        652
+      ]
+    },
+    {
+      "label": "EvenMessage",
+      "name": "debugDialog",
+      "version": "1.0.0",
+      "properties": {
+        "message": "Even state ${nodes.dice.state}"
+      },
+      "sequence": 0,
+      "position": [
+        725,
+        284
+      ]
+    },
+    {
+      "label": "Function_1",
+      "name": "Function",
+      "version": "1.0.1",
+      "properties": {
+        "formula": "${nodes.dice.rawData.randomValue} + ${nodes.dice_2.rawData.randomValue}",
+        "threshold": "1"
+      },
+      "position": [
+        531,
+        498
+      ]
+    },
+    {
+      "label": "Function_2",
+      "name": "Function",
+      "version": "1.0.1",
+      "properties": {
+        "formula": "${nodes.transformer.rawData.randomValue} - ${nodes.dice.rawData.randomValue}",
+        "threshold": "0"
+      },
+      "position": [
+        782,
+        441
+      ]
+    },
+    {
+      "label": "OddMessage",
+      "name": "debugDialog",
+      "version": "1.0.0",
+      "properties": {
+        "message": "Odd state ${nodes.dice.state}"
+      },
+      "sequence": 0,
+      "position": [
+        756,
+        195
+      ]
+    },
+    {
+      "label": "dice",
+      "name": "dice",
+      "version": "1.0.9",
+      "position": [
+        -16,
+        244
+      ]
+    },
+    {
+      "label": "dice_2",
+      "name": "dice",
+      "version": "1.0.9",
+      "position": [
+        198,
+        476
+      ]
+    },
+    {
+      "label": "dice_3",
+      "name": "dice",
+      "version": "1.0.9",
+      "position": [
+        818,
+        77
+      ]
+    },
+    {
+      "label": "dice_4",
+      "name": "dice",
+      "version": "1.0.9",
+      "position": [
+        542,
+        61
+      ]
+    },
+    {
+      "label": "dice_5",
+      "name": "dice",
+      "version": "1.0.9",
+      "position": [
+        198,
+        660
+      ]
+    },
+    {
+      "label": "isOddState",
+      "name": "condition",
+      "version": "1.1.0",
+      "properties": {
+        "condition": "\"${nodes.dice.state}\" == \"ONE\" ||  \n\"${nodes.dice.state}\" == \"THREE\" || \n\"${nodes.dice.state}\" == \"FIVE\"  \n"
+      },
+      "position": [
+        405,
+        240
+      ]
+    },
+    {
+      "label": "transformer",
+      "name": "transformer",
+      "version": "2.0.0",
+      "properties": {
+        "transformer": "{\n   \"randomValue\" : ${nodes.dice.rawData.randomValue}\n}"
+      },
+      "position": [
+        491,
+        378
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "label": "AND_1",
+      "type": "AND",
+      "parentLabels": [
+        "dice_5",
+        "dice_2"
+      ],
+      "combinations": [
+        [
+          "SIX",
+          "SIX"
+        ]
+      ],
+      "position": [
+        451,
+        648
+      ]
+    }
+  ],
+  "triggers": [
+    {
+      "sourceLabel": "dice",
+      "destinationLabel": "isOddState"
+    },
+    {
+      "sourceLabel": "isOddState",
+      "destinationLabel": "OddMessage",
+      "statesTrigger": [
+        "True"
+      ]
+    },
+    {
+      "sourceLabel": "dice",
+      "destinationLabel": "dice_5",
+      "statesTrigger": [
+        "ONE"
+      ]
+    },
+    {
+      "sourceLabel": "AND_1",
+      "destinationLabel": "Bingo",
+      "statesTrigger": [
+        "TRUE"
+      ]
+    },
+    {
+      "sourceLabel": "dice_2",
+      "destinationLabel": "Function_1"
+    },
+    {
+      "sourceLabel": "transformer",
+      "destinationLabel": "Function_2"
+    },
+    {
+      "sourceLabel": "isOddState",
+      "destinationLabel": "EvenMessage",
+      "statesTrigger": [
+        "False"
+      ]
+    },
+    {
+      "sourceLabel": "dice",
+      "destinationLabel": "dice_4",
+      "stateChangeTrigger": {
+        "stateFrom": "*",
+        "stateTo": "TWO"
+      }
+    },
+    {
+      "sourceLabel": "isOddState",
+      "destinationLabel": "dice_3",
+      "statesTrigger": [
+        "True"
+      ]
+    },
+    {
+      "sourceLabel": "dice",
+      "destinationLabel": "transformer"
+    },
+    {
+      "sourceLabel": "dice",
+      "destinationLabel": "dice_2"
+    }
+  ],
+  "name": "condition",
+  "user": "veselin@waylay.io",
+  "createTime": 1610986043613,
+  "lastUpdateTime": 1610986199698,
+  "metadata": {
+    "infoBoxes": [
+      {
+        "x": 225,
+        "y": 44,
+        "text": "Conditional execution \non transition"
+      },
+      {
+        "x": 624,
+        "y": 724,
+        "text": "Conditional actuation on \nthe joined outcome"
+      },
+      {
+        "x": 365,
+        "y": 182,
+        "text": "Condition expressed as \nthe sensor outcome"
+      },
+      {
+        "x": 750,
+        "y": 547,
+        "text": "Native stream functions \nmixed with pure Lamdas"
+      }
+    ]
+  },
+  "simplifiedGraph": {
+    "sensors": [
+      {
+        "label": "EvenMessage",
+        "name": "debugDialog",
+        "version": "1.0.0",
+        "properties": {
+          "message": "Even state ${nodes.dice.state}"
+        },
+        "sequence": 0,
+        "position": [
+          725,
+          284
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      },
+      {
+        "label": "Function_1",
+        "name": "Function",
+        "version": "1.0.1",
+        "properties": {
+          "formula": "${nodes.dice.rawData.randomValue} + ${nodes.dice_2.rawData.randomValue}",
+          "threshold": "1"
+        },
+        "position": [
+          531,
+          498
+        ]
+      },
+      {
+        "label": "Function_2",
+        "name": "Function",
+        "version": "1.0.1",
+        "properties": {
+          "formula": "${nodes.transformer.rawData.randomValue} - ${nodes.dice.rawData.randomValue}",
+          "threshold": "0"
+        },
+        "position": [
+          782,
+          441
+        ]
+      },
+      {
+        "label": "dice",
+        "name": "dice",
+        "version": "1.0.9",
+        "properties": {},
+        "position": [
+          -16,
+          244
+        ]
+      },
+      {
+        "label": "dice_2",
+        "name": "dice",
+        "version": "1.0.9",
+        "properties": {},
+        "position": [
+          198,
+          476
+        ]
+      },
+      {
+        "label": "dice_3",
+        "name": "dice",
+        "version": "1.0.9",
+        "properties": {},
+        "position": [
+          818,
+          77
+        ]
+      },
+      {
+        "label": "dice_4",
+        "name": "dice",
+        "version": "1.0.9",
+        "properties": {},
+        "position": [
+          542,
+          61
+        ]
+      },
+      {
+        "label": "dice_5",
+        "name": "dice",
+        "version": "1.0.9",
+        "properties": {},
+        "position": [
+          198,
+          660
+        ]
+      },
+      {
+        "label": "isOddState",
+        "name": "condition",
+        "version": "1.1.0",
+        "properties": {
+          "condition": "\"${nodes.dice.state}\" == \"ONE\" ||  \n\"${nodes.dice.state}\" == \"THREE\" || \n\"${nodes.dice.state}\" == \"FIVE\"  \n"
+        },
+        "position": [
+          405,
+          240
+        ]
+      },
+      {
+        "label": "OddMessage",
+        "name": "debugDialog",
+        "version": "1.0.0",
+        "properties": {
+          "message": "Odd state ${nodes.dice.state}"
+        },
+        "sequence": 0,
+        "position": [
+          756,
+          195
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      },
+      {
+        "label": "transformer",
+        "name": "transformer",
+        "version": "2.0.0",
+        "properties": {
+          "transformer": "{\n   \"randomValue\" : ${nodes.dice.rawData.randomValue}\n}"
+        },
+        "position": [
+          491,
+          378
+        ]
+      },
+      {
+        "label": "Bingo",
+        "name": "debugDialog",
+        "version": "1.0.0",
+        "properties": {
+          "message": "Bingo"
+        },
+        "sequence": 0,
+        "position": [
+          674,
+          652
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      }
+    ],
+    "actuators": [],
+    "relations": [
+      {
+        "label": "AND_1",
+        "type": "AND",
+        "parentLabels": [
+          "dice_5",
+          "dice_2"
+        ],
+        "combinations": [
+          [
+            "SIX",
+            "SIX"
+          ]
+        ],
+        "position": [
+          451,
+          648
+        ]
+      }
+    ],
+    "triggers": [
+      {
+        "sourceLabel": "AND_1",
+        "destinationLabel": "Bingo",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "TRUE"
+        ]
+      },
+      {
+        "sourceLabel": "dice_2",
+        "destinationLabel": "Function_1",
+        "invocationPolicy": 0
+      },
+      {
+        "sourceLabel": "transformer",
+        "destinationLabel": "Function_2",
+        "invocationPolicy": 0
+      },
+      {
+        "sourceLabel": "dice",
+        "destinationLabel": "dice_2",
+        "invocationPolicy": 0
+      },
+      {
+        "sourceLabel": "isOddState",
+        "destinationLabel": "dice_3",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "True"
+        ]
+      },
+      {
+        "sourceLabel": "dice",
+        "destinationLabel": "dice_5",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "ONE"
+        ]
+      },
+      {
+        "sourceLabel": "isOddState",
+        "destinationLabel": "OddMessage",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "True"
+        ]
+      },
+      {
+        "sourceLabel": "isOddState",
+        "destinationLabel": "EvenMessage",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "False"
+        ]
+      },
+      {
+        "sourceLabel": "dice",
+        "destinationLabel": "isOddState",
+        "invocationPolicy": 0
+      },
+      {
+        "sourceLabel": "dice",
+        "destinationLabel": "transformer",
+        "invocationPolicy": 0
+      },
+      {
+        "sourceLabel": "dice",
+        "destinationLabel": "dice_4",
+        "invocationPolicy": 0,
+        "stateChangeTrigger": {
+          "stateFrom": "*",
+          "stateTo": "TWO"
+        }
+      }
+    ]
+  },
+  "discoveryTemplate": false,
+  "notes": [
+    {
+      "position": [
+        225,
+        44
+      ],
+      "text": "Conditional execution \non transition"
+    },
+    {
+      "position": [
+        624,
+        724
+      ],
+      "text": "Conditional actuation on \nthe joined outcome"
+    },
+    {
+      "position": [
+        365,
+        182
+      ],
+      "text": "Condition expressed as \nthe sensor outcome"
+    },
+    {
+      "position": [
+        750,
+        547
+      ],
+      "text": "Native stream functions \nmixed with pure Lamdas"
+    }
+  ]
+}

@@ -1,0 +1,257 @@
+{
+  "sensors": [
+    {
+      "label": "bitflip_1",
+      "name": "bitflip",
+      "version": "1.0.2",
+      "position": [
+        -594,
+        38
+      ]
+    },
+    {
+      "label": "bitflip_2",
+      "name": "bitflip",
+      "version": "1.0.2",
+      "position": [
+        -593,
+        228
+      ]
+    },
+    {
+      "label": "bitflip_3",
+      "name": "bitflip",
+      "version": "1.0.2",
+      "position": [
+        -353,
+        299
+      ]
+    },
+    {
+      "label": "count15",
+      "name": "bitflip",
+      "version": "1.0.2",
+      "position": [
+        -58,
+        164
+      ]
+    },
+    {
+      "label": "debugDialog",
+      "name": "debugDialog",
+      "version": "1.0.0",
+      "properties": {
+        "message": "Yes"
+      },
+      "sequence": 0,
+      "position": [
+        174,
+        144
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "label": "Gate_1111",
+      "type": "AND",
+      "parentLabels": [
+        "bitflip_1",
+        "bitflip_2",
+        "bitflip_3"
+      ],
+      "combinations": [
+        [
+          "1",
+          "1",
+          "1"
+        ]
+      ],
+      "position": [
+        -182,
+        75
+      ]
+    }
+  ],
+  "triggers": [
+    {
+      "sourceLabel": "count15",
+      "destinationLabel": "debugDialog",
+      "statesTrigger": [
+        "0"
+      ]
+    },
+    {
+      "sourceLabel": "bitflip_2",
+      "destinationLabel": "bitflip_3",
+      "stateChangeTrigger": {
+        "stateFrom": "1",
+        "stateTo": "0"
+      }
+    },
+    {
+      "sourceLabel": "Gate_1111",
+      "destinationLabel": "count15",
+      "statesTrigger": [
+        "TRUE"
+      ]
+    },
+    {
+      "sourceLabel": "bitflip_1",
+      "destinationLabel": "bitflip_2",
+      "stateChangeTrigger": {
+        "stateFrom": "1",
+        "stateTo": "0"
+      }
+    }
+  ],
+  "name": "bitFlipCounter",
+  "user": "veselin@waylay.io",
+  "createTime": 1431416047129,
+  "lastUpdateTime": 1610985849525,
+  "metadata": {
+    "infoBoxes": [
+      {
+        "x": -706,
+        "y": -99,
+        "text": "Showcase persistence of plugs\nbetween two consecutive executions,\nusing internalState."
+      }
+    ]
+  },
+  "simplifiedGraph": {
+    "sensors": [
+      {
+        "label": "bitflip_1",
+        "name": "bitflip",
+        "version": "1.0.2",
+        "properties": {},
+        "sequence": 1,
+        "position": [
+          -594,
+          38
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      },
+      {
+        "label": "bitflip_2",
+        "name": "bitflip",
+        "version": "1.0.2",
+        "properties": {},
+        "position": [
+          -593,
+          228
+        ]
+      },
+      {
+        "label": "bitflip_3",
+        "name": "bitflip",
+        "version": "1.0.2",
+        "properties": {},
+        "sequence": 1,
+        "position": [
+          -353,
+          299
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      },
+      {
+        "label": "count15",
+        "name": "bitflip",
+        "version": "1.0.2",
+        "properties": {},
+        "sequence": 1,
+        "position": [
+          -58,
+          164
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      },
+      {
+        "label": "debugDialog",
+        "name": "debugDialog",
+        "version": "1.0.0",
+        "properties": {
+          "message": "Yes"
+        },
+        "sequence": 0,
+        "position": [
+          174,
+          144
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      }
+    ],
+    "actuators": [],
+    "relations": [
+      {
+        "label": "Gate_1111",
+        "type": "AND",
+        "parentLabels": [
+          "bitflip_1",
+          "bitflip_2",
+          "bitflip_3"
+        ],
+        "combinations": [
+          [
+            "1",
+            "1",
+            "1"
+          ]
+        ],
+        "position": [
+          -182,
+          75
+        ]
+      }
+    ],
+    "triggers": [
+      {
+        "sourceLabel": "count15",
+        "destinationLabel": "debugDialog",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "0"
+        ]
+      },
+      {
+        "sourceLabel": "Gate_1111",
+        "destinationLabel": "count15",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "TRUE"
+        ]
+      },
+      {
+        "sourceLabel": "bitflip_1",
+        "destinationLabel": "bitflip_2",
+        "invocationPolicy": 0,
+        "stateChangeTrigger": {
+          "stateFrom": "1",
+          "stateTo": "0"
+        }
+      },
+      {
+        "sourceLabel": "bitflip_2",
+        "destinationLabel": "bitflip_3",
+        "invocationPolicy": 0,
+        "stateChangeTrigger": {
+          "stateFrom": "1",
+          "stateTo": "0"
+        }
+      }
+    ]
+  },
+  "discoveryTemplate": false,
+  "notes": [
+    {
+      "position": [
+        -706,
+        -99
+      ],
+      "text": "Showcase persistence of plugs\nbetween two consecutive executions,\nusing internalState."
+    }
+  ]
+}

@@ -1,0 +1,262 @@
+{
+  "sensors": [
+    {
+      "label": "Function_1",
+      "name": "Function",
+      "version": "1.0.1",
+      "properties": {
+        "formula": "${streamdata.temperature}",
+        "threshold": "21"
+      },
+      "resource": "$",
+      "position": [
+        197,
+        242
+      ],
+      "evictionTime": 1000
+    },
+    {
+      "label": "Function_2",
+      "name": "Function",
+      "version": "1.0.1",
+      "properties": {
+        "formula": "${streamdata.humidity}",
+        "threshold": "80"
+      },
+      "resource": "$",
+      "position": [
+        189,
+        465
+      ],
+      "evictionTime": 1000
+    },
+    {
+      "label": "condition",
+      "name": "condition",
+      "version": "1.1.0",
+      "properties": {
+        "condition": "${streamdata.temperature} > 21 && ${streamdata.humidity} > 80"
+      },
+      "sequence": 0,
+      "position": [
+        440,
+        502
+      ]
+    },
+    {
+      "label": "debugDialog_1",
+      "name": "debugDialog",
+      "version": "1.0.0",
+      "properties": {
+        "message": "Temperature ${nodes.Function_1.rawData.formulaValue}\nHumidity ${nodes.Function_2.rawData.formulaValue}"
+      },
+      "sequence": 0,
+      "position": [
+        708,
+        246
+      ]
+    },
+    {
+      "label": "debugDialog_2",
+      "name": "debugDialog",
+      "version": "1.0.0",
+      "properties": {
+        "message": "Above both values"
+      },
+      "sequence": 0,
+      "position": [
+        730,
+        454
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "label": "AND_1",
+      "type": "AND",
+      "parentLabels": [
+        "Function_2",
+        "Function_1"
+      ],
+      "combinations": [
+        [
+          "Above",
+          "Above"
+        ]
+      ],
+      "position": [
+        466,
+        338
+      ]
+    }
+  ],
+  "triggers": [
+    {
+      "sourceLabel": "condition",
+      "destinationLabel": "debugDialog_2",
+      "statesTrigger": [
+        "True"
+      ]
+    },
+    {
+      "sourceLabel": "AND_1",
+      "destinationLabel": "debugDialog_1",
+      "statesTrigger": [
+        "TRUE"
+      ]
+    }
+  ],
+  "name": "dataLogStream",
+  "user": "veselin@waylay.io",
+  "createTime": 1610984798265,
+  "lastUpdateTime": 1610984928444,
+  "metadata": {
+    "infoBoxes": [
+      {
+        "x": 356,
+        "y": 156,
+        "text": "Example of using native functions and \nthe same with condition script node.\nYou can test it either as a stream task\nor test it against the data logs."
+      },
+      {
+        "x": 542,
+        "y": 592,
+        "text": "Condition node which does the same as Functions and AND gate"
+      }
+    ]
+  },
+  "simplifiedGraph": {
+    "sensors": [
+      {
+        "label": "Function_1",
+        "name": "Function",
+        "version": "1.0.1",
+        "properties": {
+          "formula": "${streamdata.temperature}",
+          "threshold": "21"
+        },
+        "resource": "$",
+        "position": [
+          197,
+          242
+        ],
+        "evictionTime": 1000
+      },
+      {
+        "label": "Function_2",
+        "name": "Function",
+        "version": "1.0.1",
+        "properties": {
+          "formula": "${streamdata.humidity}",
+          "threshold": "80"
+        },
+        "resource": "$",
+        "position": [
+          189,
+          465
+        ],
+        "evictionTime": 1000
+      },
+      {
+        "label": "condition",
+        "name": "condition",
+        "version": "1.1.0",
+        "properties": {
+          "condition": "${streamdata.temperature} > 21 && ${streamdata.humidity} > 80"
+        },
+        "sequence": 0,
+        "position": [
+          440,
+          502
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      },
+      {
+        "label": "debugDialog_2",
+        "name": "debugDialog",
+        "version": "1.0.0",
+        "properties": {
+          "message": "Above both values"
+        },
+        "sequence": 0,
+        "position": [
+          730,
+          454
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      },
+      {
+        "label": "debugDialog_1",
+        "name": "debugDialog",
+        "version": "1.0.0",
+        "properties": {
+          "message": "Temperature ${nodes.Function_1.rawData.formulaValue}\nHumidity ${nodes.Function_2.rawData.formulaValue}"
+        },
+        "sequence": 0,
+        "position": [
+          708,
+          246
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      }
+    ],
+    "actuators": [],
+    "relations": [
+      {
+        "label": "AND_1",
+        "type": "AND",
+        "parentLabels": [
+          "Function_2",
+          "Function_1"
+        ],
+        "combinations": [
+          [
+            "Above",
+            "Above"
+          ]
+        ],
+        "position": [
+          466,
+          338
+        ]
+      }
+    ],
+    "triggers": [
+      {
+        "sourceLabel": "AND_1",
+        "destinationLabel": "debugDialog_1",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "TRUE"
+        ]
+      },
+      {
+        "sourceLabel": "condition",
+        "destinationLabel": "debugDialog_2",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "True"
+        ]
+      }
+    ]
+  },
+  "discoveryTemplate": false,
+  "notes": [
+    {
+      "position": [
+        356,
+        156
+      ],
+      "text": "Example of using native functions and \nthe same with condition script node.\nYou can test it either as a stream task\nor test it against the data logs."
+    },
+    {
+      "position": [
+        542,
+        592
+      ],
+      "text": "Condition node which does the same as Functions and AND gate"
+    }
+  ]
+}

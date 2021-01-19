@@ -1,0 +1,171 @@
+{
+  "sensors": [
+    {
+      "label": "data",
+      "name": "getMetric",
+      "version": "2.0.0",
+      "properties": {
+        "metric": "temperature",
+        "from": "PT30S"
+      },
+      "resource": "$",
+      "position": [
+        96,
+        213
+      ]
+    },
+    {
+      "label": "debugDialog_2",
+      "name": "debugDialog",
+      "version": "1.0.0",
+      "properties": {
+        "message": "Max: ${nodes.transformer.rawData.max}Min: ${nodes.transformer.rawData.min}"
+      },
+      "position": [
+        676,
+        190
+      ]
+    },
+    {
+      "label": "latestGreaterThan20",
+      "name": "condition",
+      "version": "1.1.0",
+      "properties": {
+        "condition": "(() => {     \n  console.log('latest value', $${nodes.data.rawData.series}.pop()[1])\n  return  $${nodes.data.rawData.series}.pop()[1] > 20 \n})()"
+      },
+      "position": [
+        369,
+        307
+      ]
+    },
+    {
+      "label": "transformer",
+      "name": "transformer",
+      "version": "2.0.0",
+      "properties": {
+        "transformer": "{\n  \"max\" : Math.max(...$${nodes.data.rawData.series}.map(x => x[1])),\n  \"min\" : Math.min(...$${nodes.data.rawData.series}.map(x => x[1]))\n}"
+      },
+      "position": [
+        387,
+        190
+      ]
+    }
+  ],
+  "triggers": [
+    {
+      "sourceLabel": "transformer",
+      "destinationLabel": "debugDialog_2",
+      "statesTrigger": [
+        "Success"
+      ]
+    },
+    {
+      "sourceLabel": "data",
+      "destinationLabel": "latestGreaterThan20",
+      "statesTrigger": [
+        "Collected"
+      ]
+    },
+    {
+      "sourceLabel": "data",
+      "destinationLabel": "transformer",
+      "statesTrigger": [
+        "Collected"
+      ]
+    }
+  ],
+  "name": "dataPolling",
+  "user": "veselin@waylay.io",
+  "createTime": 1610986428566,
+  "lastUpdateTime": 1610986466376,
+  "simplifiedGraph": {
+    "sensors": [
+      {
+        "label": "data",
+        "name": "getMetric",
+        "version": "2.0.0",
+        "properties": {
+          "metric": "temperature",
+          "from": "PT30S"
+        },
+        "resource": "$",
+        "sequence": 1,
+        "position": [
+          96,
+          213
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      },
+      {
+        "label": "debugDialog_2",
+        "name": "debugDialog",
+        "version": "1.0.0",
+        "properties": {
+          "message": "Max: ${nodes.transformer.rawData.max}Min: ${nodes.transformer.rawData.min}"
+        },
+        "position": [
+          676,
+          190
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      },
+      {
+        "label": "latestGreaterThan20",
+        "name": "condition",
+        "version": "1.1.0",
+        "properties": {
+          "condition": "(() => {     \n  console.log('latest value', $${nodes.data.rawData.series}.pop()[1])\n  return  $${nodes.data.rawData.series}.pop()[1] > 20 \n})()"
+        },
+        "position": [
+          369,
+          307
+        ]
+      },
+      {
+        "label": "transformer",
+        "name": "transformer",
+        "version": "2.0.0",
+        "properties": {
+          "transformer": "{\n  \"max\" : Math.max(...$${nodes.data.rawData.series}.map(x => x[1])),\n  \"min\" : Math.min(...$${nodes.data.rawData.series}.map(x => x[1]))\n}"
+        },
+        "position": [
+          387,
+          190
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      }
+    ],
+    "actuators": [],
+    "relations": [],
+    "triggers": [
+      {
+        "sourceLabel": "transformer",
+        "destinationLabel": "debugDialog_2",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "Success"
+        ]
+      },
+      {
+        "sourceLabel": "data",
+        "destinationLabel": "latestGreaterThan20",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "Collected"
+        ]
+      },
+      {
+        "sourceLabel": "data",
+        "destinationLabel": "transformer",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "Collected"
+        ]
+      }
+    ]
+  },
+  "discoveryTemplate": false
+}

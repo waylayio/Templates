@@ -1,0 +1,231 @@
+{
+  "sensors": [
+    {
+      "label": "Function_1",
+      "name": "Function",
+      "version": "1.0.1",
+      "properties": {
+        "formula": "${streamdata.temperature}",
+        "threshold": "20"
+      },
+      "resource": "$",
+      "position": [
+        250,
+        338
+      ]
+    },
+    {
+      "label": "condition_1",
+      "name": "condition",
+      "version": "1.1.0",
+      "properties": {
+        "condition": "${nodes.stream_1.rawData.stream.temperature} > 20"
+      },
+      "sequence": 0,
+      "position": [
+        477,
+        621
+      ]
+    },
+    {
+      "label": "debugDialog_1",
+      "name": "debugDialog",
+      "version": "1.0.0",
+      "properties": {
+        "message": "Above or Equal ${nodes.Function_1.rawData.formulaValue}"
+      },
+      "position": [
+        577,
+        299
+      ]
+    },
+    {
+      "label": "debugDialog_2",
+      "name": "debugDialog",
+      "version": "1.0.0",
+      "properties": {
+        "message": "Below ${nodes.Function_1.rawData.formulaValue}"
+      },
+      "position": [
+        566,
+        429
+      ]
+    },
+    {
+      "label": "stream_1",
+      "name": "stream",
+      "version": "1.0.0",
+      "resource": "$",
+      "sequence": 0,
+      "position": [
+        155,
+        665
+      ]
+    }
+  ],
+  "triggers": [
+    {
+      "sourceLabel": "Function_1",
+      "destinationLabel": "debugDialog_1",
+      "statesTrigger": [
+        "Above",
+        "Equal"
+      ]
+    },
+    {
+      "sourceLabel": "stream_1",
+      "destinationLabel": "condition_1",
+      "statesTrigger": [
+        "Data"
+      ]
+    },
+    {
+      "sourceLabel": "Function_1",
+      "destinationLabel": "debugDialog_2",
+      "statesTrigger": [
+        "Below"
+      ]
+    }
+  ],
+  "name": "streamTemplate",
+  "user": "veselin@waylay.io",
+  "createTime": 1610987020189,
+  "lastUpdateTime": 1610988002067,
+  "metadata": {
+    "infoBoxes": [
+      {
+        "x": 227,
+        "y": 247,
+        "text": "The Function Node executes on new data \n(check the node settings!)\nnew stream data will trigger the function evaluation \nagainst the threshold."
+      },
+      {
+        "x": 255,
+        "y": 557,
+        "text": "The same as above, but achieved with the stream node\nand the condition sensor (for formula evaluation)\n"
+      }
+    ]
+  },
+  "simplifiedGraph": {
+    "sensors": [
+      {
+        "label": "Function_1",
+        "name": "Function",
+        "version": "1.0.1",
+        "properties": {
+          "formula": "${streamdata.temperature}",
+          "threshold": "20"
+        },
+        "resource": "$",
+        "position": [
+          250,
+          338
+        ],
+        "dataTrigger": true,
+        "tickTrigger": false
+      },
+      {
+        "label": "debugDialog_1",
+        "name": "debugDialog",
+        "version": "1.0.0",
+        "properties": {
+          "message": "Above or Equal ${nodes.Function_1.rawData.formulaValue}"
+        },
+        "position": [
+          577,
+          299
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      },
+      {
+        "label": "debugDialog_2",
+        "name": "debugDialog",
+        "version": "1.0.0",
+        "properties": {
+          "message": "Below ${nodes.Function_1.rawData.formulaValue}"
+        },
+        "position": [
+          566,
+          429
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      },
+      {
+        "label": "stream_1",
+        "name": "stream",
+        "version": "1.0.0",
+        "properties": {},
+        "resource": "$",
+        "sequence": 0,
+        "position": [
+          155,
+          665
+        ],
+        "dataTrigger": true,
+        "tickTrigger": false
+      },
+      {
+        "label": "condition_1",
+        "name": "condition",
+        "version": "1.1.0",
+        "properties": {
+          "condition": "${nodes.stream_1.rawData.stream.temperature} > 20"
+        },
+        "sequence": 0,
+        "position": [
+          477,
+          621
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      }
+    ],
+    "actuators": [],
+    "relations": [],
+    "triggers": [
+      {
+        "sourceLabel": "Function_1",
+        "destinationLabel": "debugDialog_1",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "Above",
+          "Equal"
+        ]
+      },
+      {
+        "sourceLabel": "Function_1",
+        "destinationLabel": "debugDialog_2",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "Below"
+        ]
+      },
+      {
+        "sourceLabel": "stream_1",
+        "destinationLabel": "condition_1",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "Data"
+        ]
+      }
+    ]
+  },
+  "discoveryTemplate": false,
+  "notes": [
+    {
+      "position": [
+        227,
+        247
+      ],
+      "text": "The Function Node executes on new data \n(check the node settings!)\nnew stream data will trigger the function evaluation \nagainst the threshold."
+    },
+    {
+      "position": [
+        255,
+        557
+      ],
+      "text": "The same as above, but achieved with the stream node\nand the condition sensor (for formula evaluation)\n"
+    }
+  ]
+}

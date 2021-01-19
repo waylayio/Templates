@@ -1,0 +1,246 @@
+{
+  "sensors": [
+    {
+      "label": "OutlierDetected",
+      "name": "condition",
+      "version": "1.1.0",
+      "properties": {
+        "condition": "var series = $${nodes.byomlPredict_1.rawData.predictions}\nvar count = series.filter(x => x==-1).length\nvar outlier_percentage = 100*count/series.length\nconsole.log(series)\nconsole.log(outlier_percentage)\n\noutlier_percentage > 1\n"
+      },
+      "resource": "$",
+      "position": [
+        381,
+        273
+      ]
+    },
+    {
+      "label": "byomlPredict_1",
+      "name": "byomlPredict",
+      "version": "1.0.0",
+      "properties": {
+        "modelName": "${node.resource.meta.ml_model}",
+        "instances": "$${nodes.executeQuery_1.rawData.data}"
+      },
+      "resource": "$",
+      "position": [
+        136,
+        296
+      ]
+    },
+    {
+      "label": "createAlarm",
+      "name": "createAlarm",
+      "version": "1.0.0",
+      "properties": {
+        "severity": "CRITICAL",
+        "text": "Anomaly detected",
+        "type": "Anomaly"
+      },
+      "resource": "$",
+      "position": [
+        630,
+        355
+      ]
+    },
+    {
+      "label": "debugDialog_2",
+      "name": "debugDialog",
+      "version": "1.0.0",
+      "properties": {
+        "message": "Outlier Detected "
+      },
+      "position": [
+        639,
+        261
+      ]
+    },
+    {
+      "label": "executeQuery_1",
+      "name": "executeQuery",
+      "version": "1.2.0",
+      "properties": {
+        "queryName": "${node.resource.meta.ml_query}",
+        "removeTimestamp": "true",
+        "window": "PT1M"
+      },
+      "resource": "$",
+      "position": [
+        -60,
+        215
+      ]
+    }
+  ],
+  "triggers": [
+    {
+      "sourceLabel": "OutlierDetected",
+      "destinationLabel": "debugDialog_2",
+      "statesTrigger": [
+        "True"
+      ]
+    },
+    {
+      "sourceLabel": "OutlierDetected",
+      "destinationLabel": "createAlarm",
+      "statesTrigger": [
+        "True"
+      ]
+    },
+    {
+      "sourceLabel": "byomlPredict_1",
+      "destinationLabel": "OutlierDetected",
+      "statesTrigger": [
+        "Predicted"
+      ]
+    },
+    {
+      "sourceLabel": "executeQuery_1",
+      "destinationLabel": "byomlPredict_1",
+      "statesTrigger": [
+        "Collected"
+      ]
+    }
+  ],
+  "name": "MLProcessing",
+  "user": "veselin@waylay.io",
+  "createTime": 1610989061844,
+  "lastUpdateTime": 1611044116725,
+  "metadata": {
+    "infoBoxes": [
+      {
+        "x": 99,
+        "y": 400,
+        "text": "Your meta model must include\nquery name (ml_query) and model name (ml_model)."
+      }
+    ]
+  },
+  "simplifiedGraph": {
+    "sensors": [
+      {
+        "label": "OutlierDetected",
+        "name": "condition",
+        "version": "1.1.0",
+        "properties": {
+          "condition": "var series = $${nodes.byomlPredict_1.rawData.predictions}\nvar count = series.filter(x => x==-1).length\nvar outlier_percentage = 100*count/series.length\nconsole.log(series)\nconsole.log(outlier_percentage)\n\noutlier_percentage > 1\n"
+        },
+        "resource": "$",
+        "position": [
+          381,
+          273
+        ],
+        "dataTrigger": false,
+        "tickTrigger": false
+      },
+      {
+        "label": "byomlPredict_1",
+        "name": "byomlPredict",
+        "version": "1.0.0",
+        "properties": {
+          "modelName": "${node.resource.meta.ml_model}",
+          "instances": "$${nodes.executeQuery_1.rawData.data}"
+        },
+        "resource": "$",
+        "sequence": 1,
+        "position": [
+          136,
+          296
+        ],
+        "dataTrigger": false,
+        "tickTrigger": false
+      },
+      {
+        "label": "createAlarm",
+        "name": "createAlarm",
+        "version": "1.0.0",
+        "properties": {
+          "severity": "CRITICAL",
+          "text": "Anomaly detected",
+          "type": "Anomaly"
+        },
+        "resource": "$",
+        "position": [
+          630,
+          355
+        ],
+        "dataTrigger": false,
+        "tickTrigger": false
+      },
+      {
+        "label": "debugDialog_2",
+        "name": "debugDialog",
+        "version": "1.0.0",
+        "properties": {
+          "message": "Outlier Detected "
+        },
+        "position": [
+          639,
+          261
+        ],
+        "dataTrigger": false,
+        "tickTrigger": false
+      },
+      {
+        "label": "executeQuery_1",
+        "name": "executeQuery",
+        "version": "1.2.0",
+        "properties": {
+          "queryName": "${node.resource.meta.ml_query}",
+          "removeTimestamp": "true",
+          "window": "PT1M"
+        },
+        "resource": "$",
+        "position": [
+          -60,
+          215
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      }
+    ],
+    "actuators": [],
+    "relations": [],
+    "triggers": [
+      {
+        "sourceLabel": "byomlPredict_1",
+        "destinationLabel": "OutlierDetected",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "Predicted"
+        ]
+      },
+      {
+        "sourceLabel": "executeQuery_1",
+        "destinationLabel": "byomlPredict_1",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "Collected"
+        ]
+      },
+      {
+        "sourceLabel": "OutlierDetected",
+        "destinationLabel": "createAlarm",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "True"
+        ]
+      },
+      {
+        "sourceLabel": "OutlierDetected",
+        "destinationLabel": "debugDialog_2",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "True"
+        ]
+      }
+    ]
+  },
+  "discoveryTemplate": false,
+  "notes": [
+    {
+      "position": [
+        99,
+        400
+      ],
+      "text": "Your meta model must include\nquery name (ml_query) and model name (ml_model)."
+    }
+  ]
+}

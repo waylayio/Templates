@@ -1,0 +1,394 @@
+{
+  "sensors": [
+    {
+      "label": "data",
+      "name": "transformer",
+      "version": "2.0.0",
+      "properties": {
+        "transformer": "{\n  \"series\" : [1,2,3,4,5,6,7,8]\n}"
+      },
+      "position": [
+        25,
+        131
+      ]
+    },
+    {
+      "label": "debugDialog_1",
+      "name": "debugDialog",
+      "version": "1.0.0",
+      "properties": {
+        "message": "$${nodes.lambda.rawData.data}"
+      },
+      "sequence": 0,
+      "position": [
+        572,
+        219
+      ]
+    },
+    {
+      "label": "debugDialog_2",
+      "name": "debugDialog",
+      "version": "1.0.0",
+      "properties": {
+        "message": "Max: ${nodes.transformer.rawData.max}Min: ${nodes.transformer.rawData.min}"
+      },
+      "sequence": 0,
+      "position": [
+        590,
+        350
+      ]
+    },
+    {
+      "label": "debugDialog_3",
+      "name": "debugDialog",
+      "version": "1.0.0",
+      "properties": {
+        "message": "${nodes.templateHtml.rawData.result}"
+      },
+      "sequence": 0,
+      "position": [
+        608,
+        470
+      ]
+    },
+    {
+      "label": "lambda",
+      "name": "script",
+      "version": "2.0.0",
+      "properties": {
+        "script": "() => {\n  const data = $${nodes.data.rawData.series}.map((x)=> 2*x)\n  console.log('data', data)\n  return {data}\n}"
+      },
+      "position": [
+        265,
+        188
+      ]
+    },
+    {
+      "label": "mandrillMail",
+      "name": "mandrillMail",
+      "version": "1.0.0",
+      "properties": {
+        "subject": "test",
+        "MANDRILL_KEY": "${vault.MANDRILL_KEY}",
+        "to": "veselin@waylay.io",
+        "from": "info@waylay.io",
+        "message": "${nodes.templateHtml.rawData.result}"
+      },
+      "sequence": 0,
+      "position": [
+        596,
+        580
+      ]
+    },
+    {
+      "label": "randomData",
+      "name": "transformer",
+      "version": "2.0.0",
+      "properties": {
+        "transformer": "(()=>{\nreturn {\n   \"series\" : Array.from({length: 5}, () => Math.floor(Math.random() * 100))\n  }\n})()"
+      },
+      "position": [
+        69,
+        399
+      ]
+    },
+    {
+      "label": "templateHtml",
+      "name": "template",
+      "version": "1.0.0",
+      "properties": {
+        "template": "<ul class=\"list\">\n  {{#each randomData.series}}\n    <li>{{this}}</li>\n  {{/each}}\n</ul>"
+      },
+      "position": [
+        291,
+        465
+      ]
+    },
+    {
+      "label": "transformer",
+      "name": "transformer",
+      "version": "2.0.0",
+      "properties": {
+        "transformer": "{\n  \"max\" : Math.max(...$${nodes.randomData.rawData.series}),\n  \"min\" : Math.min(...$${nodes.randomData.rawData.series})\n}"
+      },
+      "position": [
+        312,
+        349
+      ]
+    }
+  ],
+  "triggers": [
+    {
+      "sourceLabel": "lambda",
+      "destinationLabel": "debugDialog_1",
+      "statesTrigger": [
+        "Success"
+      ]
+    },
+    {
+      "sourceLabel": "templateHtml",
+      "destinationLabel": "mandrillMail",
+      "statesTrigger": [
+        "Success"
+      ]
+    },
+    {
+      "sourceLabel": "randomData",
+      "destinationLabel": "transformer",
+      "statesTrigger": [
+        "Success"
+      ]
+    },
+    {
+      "sourceLabel": "templateHtml",
+      "destinationLabel": "debugDialog_3",
+      "statesTrigger": [
+        "Success"
+      ]
+    },
+    {
+      "sourceLabel": "data",
+      "destinationLabel": "lambda",
+      "statesTrigger": [
+        "Success"
+      ]
+    },
+    {
+      "sourceLabel": "transformer",
+      "destinationLabel": "debugDialog_2",
+      "statesTrigger": [
+        "Success"
+      ]
+    },
+    {
+      "sourceLabel": "randomData",
+      "destinationLabel": "templateHtml",
+      "statesTrigger": [
+        "Success"
+      ]
+    }
+  ],
+  "name": "transfrormerAndTemplateExample",
+  "user": "veselin@waylay.io",
+  "createTime": 1610986603885,
+  "lastUpdateTime": 1610986856379,
+  "metadata": {
+    "infoBoxes": [
+      {
+        "x": 300,
+        "y": 111,
+        "text": "double each value in the array"
+      },
+      {
+        "x": 297,
+        "y": 558,
+        "text": "how to use a template handelbars\nto generate HTML elements"
+      }
+    ]
+  },
+  "simplifiedGraph": {
+    "sensors": [
+      {
+        "label": "data",
+        "name": "transformer",
+        "version": "2.0.0",
+        "properties": {
+          "transformer": "{\n  \"series\" : [1,2,3,4,5,6,7,8]\n}"
+        },
+        "position": [
+          25,
+          131
+        ]
+      },
+      {
+        "label": "lambda",
+        "name": "script",
+        "version": "2.0.0",
+        "properties": {
+          "script": "() => {\n  const data = $${nodes.data.rawData.series}.map((x)=> 2*x)\n  console.log('data', data)\n  return {data}\n}"
+        },
+        "position": [
+          265,
+          188
+        ]
+      },
+      {
+        "label": "randomData",
+        "name": "transformer",
+        "version": "2.0.0",
+        "properties": {
+          "transformer": "(()=>{\nreturn {\n   \"series\" : Array.from({length: 5}, () => Math.floor(Math.random() * 100))\n  }\n})()"
+        },
+        "position": [
+          69,
+          399
+        ]
+      },
+      {
+        "label": "templateHtml",
+        "name": "template",
+        "version": "1.0.0",
+        "properties": {
+          "template": "<ul class=\"list\">\n  {{#each randomData.series}}\n    <li>{{this}}</li>\n  {{/each}}\n</ul>"
+        },
+        "position": [
+          291,
+          465
+        ]
+      },
+      {
+        "label": "debugDialog_3",
+        "name": "debugDialog",
+        "version": "1.0.0",
+        "properties": {
+          "message": "${nodes.templateHtml.rawData.result}"
+        },
+        "sequence": 0,
+        "position": [
+          608,
+          470
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      },
+      {
+        "label": "mandrillMail",
+        "name": "mandrillMail",
+        "version": "1.0.0",
+        "properties": {
+          "MANDRILL_KEY": "${vault.MANDRILL_KEY}",
+          "from": "info@waylay.io",
+          "to": "veselin@waylay.io",
+          "message": "${nodes.templateHtml.rawData.result}",
+          "subject": "test"
+        },
+        "sequence": 0,
+        "position": [
+          596,
+          580
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      },
+      {
+        "label": "transformer",
+        "name": "transformer",
+        "version": "2.0.0",
+        "properties": {
+          "transformer": "{\n  \"max\" : Math.max(...$${nodes.randomData.rawData.series}),\n  \"min\" : Math.min(...$${nodes.randomData.rawData.series})\n}"
+        },
+        "position": [
+          312,
+          349
+        ]
+      },
+      {
+        "label": "debugDialog_2",
+        "name": "debugDialog",
+        "version": "1.0.0",
+        "properties": {
+          "message": "Max: ${nodes.transformer.rawData.max}Min: ${nodes.transformer.rawData.min}"
+        },
+        "sequence": 0,
+        "position": [
+          590,
+          350
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      },
+      {
+        "label": "debugDialog_1",
+        "name": "debugDialog",
+        "version": "1.0.0",
+        "properties": {
+          "message": "$${nodes.lambda.rawData.data}"
+        },
+        "sequence": 0,
+        "position": [
+          572,
+          219
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      }
+    ],
+    "actuators": [],
+    "relations": [],
+    "triggers": [
+      {
+        "sourceLabel": "randomData",
+        "destinationLabel": "transformer",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "Success"
+        ]
+      },
+      {
+        "sourceLabel": "data",
+        "destinationLabel": "lambda",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "Success"
+        ]
+      },
+      {
+        "sourceLabel": "templateHtml",
+        "destinationLabel": "debugDialog_3",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "Success"
+        ]
+      },
+      {
+        "sourceLabel": "templateHtml",
+        "destinationLabel": "mandrillMail",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "Success"
+        ]
+      },
+      {
+        "sourceLabel": "randomData",
+        "destinationLabel": "templateHtml",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "Success"
+        ]
+      },
+      {
+        "sourceLabel": "transformer",
+        "destinationLabel": "debugDialog_2",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "Success"
+        ]
+      },
+      {
+        "sourceLabel": "lambda",
+        "destinationLabel": "debugDialog_1",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "Success"
+        ]
+      }
+    ]
+  },
+  "discoveryTemplate": false,
+  "notes": [
+    {
+      "position": [
+        300,
+        111
+      ],
+      "text": "double each value in the array"
+    },
+    {
+      "position": [
+        297,
+        558
+      ],
+      "text": "how to use a template handelbars\nto generate HTML elements"
+    }
+  ]
+}
