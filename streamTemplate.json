@@ -17,11 +17,10 @@
     {
       "label": "condition_1",
       "name": "condition",
-      "version": "1.1.0",
+      "version": "1.1.6",
       "properties": {
         "condition": "${nodes.stream_1.rawData.stream.temperature} > 20"
       },
-      "sequence": 0,
       "position": [
         477,
         621
@@ -30,7 +29,7 @@
     {
       "label": "debugDialog_1",
       "name": "debugDialog",
-      "version": "1.0.0",
+      "version": "1.0.2",
       "properties": {
         "message": "Above or Equal ${nodes.Function_1.rawData.formulaValue}"
       },
@@ -42,7 +41,7 @@
     {
       "label": "debugDialog_2",
       "name": "debugDialog",
-      "version": "1.0.0",
+      "version": "1.0.2",
       "properties": {
         "message": "Below ${nodes.Function_1.rawData.formulaValue}"
       },
@@ -54,7 +53,7 @@
     {
       "label": "stream_1",
       "name": "stream",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "resource": "$",
       "sequence": 0,
       "position": [
@@ -64,6 +63,13 @@
     }
   ],
   "triggers": [
+    {
+      "sourceLabel": "Function_1",
+      "destinationLabel": "debugDialog_2",
+      "statesTrigger": [
+        "Below"
+      ]
+    },
     {
       "sourceLabel": "Function_1",
       "destinationLabel": "debugDialog_1",
@@ -78,19 +84,12 @@
       "statesTrigger": [
         "Data"
       ]
-    },
-    {
-      "sourceLabel": "Function_1",
-      "destinationLabel": "debugDialog_2",
-      "statesTrigger": [
-        "Below"
-      ]
     }
   ],
   "name": "streamTemplate",
-  "user": "veselin@waylay.io",
-  "createTime": 1610987020189,
-  "lastUpdateTime": 1610988002067,
+  "user": "veselin.pizurica@gmail.com",
+  "createTime": 1611045667551,
+  "lastUpdateTime": 1618303198900,
   "metadata": {
     "infoBoxes": [
       {
@@ -116,6 +115,7 @@
           "threshold": "20"
         },
         "resource": "$",
+        "sequence": 1,
         "position": [
           250,
           338
@@ -124,37 +124,45 @@
         "tickTrigger": false
       },
       {
+        "label": "condition_1",
+        "name": "condition",
+        "version": "1.1.6",
+        "properties": {
+          "condition": "${nodes.stream_1.rawData.stream.temperature} > 20"
+        },
+        "position": [
+          477,
+          621
+        ]
+      },
+      {
         "label": "debugDialog_1",
         "name": "debugDialog",
-        "version": "1.0.0",
+        "version": "1.0.2",
         "properties": {
           "message": "Above or Equal ${nodes.Function_1.rawData.formulaValue}"
         },
         "position": [
           577,
           299
-        ],
-        "dataTrigger": false,
-        "tickTrigger": true
+        ]
       },
       {
         "label": "debugDialog_2",
         "name": "debugDialog",
-        "version": "1.0.0",
+        "version": "1.0.2",
         "properties": {
           "message": "Below ${nodes.Function_1.rawData.formulaValue}"
         },
         "position": [
           566,
           429
-        ],
-        "dataTrigger": false,
-        "tickTrigger": true
+        ]
       },
       {
         "label": "stream_1",
         "name": "stream",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "properties": {},
         "resource": "$",
         "sequence": 0,
@@ -164,26 +172,19 @@
         ],
         "dataTrigger": true,
         "tickTrigger": false
-      },
-      {
-        "label": "condition_1",
-        "name": "condition",
-        "version": "1.1.0",
-        "properties": {
-          "condition": "${nodes.stream_1.rawData.stream.temperature} > 20"
-        },
-        "sequence": 0,
-        "position": [
-          477,
-          621
-        ],
-        "dataTrigger": false,
-        "tickTrigger": true
       }
     ],
     "actuators": [],
     "relations": [],
     "triggers": [
+      {
+        "sourceLabel": "stream_1",
+        "destinationLabel": "condition_1",
+        "invocationPolicy": 0,
+        "statesTrigger": [
+          "Data"
+        ]
+      },
       {
         "sourceLabel": "Function_1",
         "destinationLabel": "debugDialog_1",
@@ -199,14 +200,6 @@
         "invocationPolicy": 0,
         "statesTrigger": [
           "Below"
-        ]
-      },
-      {
-        "sourceLabel": "stream_1",
-        "destinationLabel": "condition_1",
-        "invocationPolicy": 0,
-        "statesTrigger": [
-          "Data"
         ]
       }
     ]
