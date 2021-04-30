@@ -1,0 +1,1513 @@
+{
+  "sensors": [
+    {
+      "label": "AlarmSBP",
+      "name": "createAlarm",
+      "version": "1.0.1",
+      "properties": {
+        "text": "SBP drop",
+        "severity": "MAJOR",
+        "type": "SBP drop",
+        "resource": "${task.RESOURCE}"
+      },
+      "position": [
+        390,
+        535
+      ]
+    },
+    {
+      "label": "Hypertension",
+      "name": "inRange",
+      "version": "1.0.1",
+      "properties": {
+        "value": "${streamdata.ht}",
+        "lowerLimit": "23",
+        "upperLimit": "29"
+      },
+      "resource": "$",
+      "position": [
+        516,
+        61
+      ]
+    },
+    {
+      "label": "PaC02",
+      "name": "inRange",
+      "version": "1.0.1",
+      "properties": {
+        "value": "${streamdata.PaC02}",
+        "lowerLimit": "20",
+        "upperLimit": "32"
+      },
+      "resource": "$",
+      "position": [
+        37,
+        368
+      ]
+    },
+    {
+      "label": "SBP",
+      "name": "inRange",
+      "version": "1.0.1",
+      "properties": {
+        "value": "${streamdata.sbp}",
+        "lowerLimit": "85",
+        "upperLimit": "90"
+      },
+      "resource": "$",
+      "position": [
+        27,
+        702
+      ]
+    },
+    {
+      "label": "SBP_DROP",
+      "name": "Function",
+      "version": "1.0.1",
+      "properties": {
+        "formula": "<GLOBAL.sbp>[-1] - <GLOBAL.sbp>",
+        "threshold": "40"
+      },
+      "position": [
+        2,
+        608
+      ]
+    },
+    {
+      "label": "SIRSAlarm",
+      "name": "createAlarm",
+      "version": "1.0.1",
+      "properties": {
+        "text": "SIRS criteria met",
+        "severity": "MAJOR",
+        "type": "SIRS",
+        "resource": "${task.RESOURCE}"
+      },
+      "position": [
+        504,
+        460
+      ]
+    },
+    {
+      "label": "SeptickShock",
+      "name": "createAlarm",
+      "version": "1.0.1",
+      "properties": {
+        "resource": "${task.RESOURCE}",
+        "text": "SeptickShock alert",
+        "severity": "CRITICAL",
+        "type": "SepsisShock"
+      },
+      "position": [
+        982,
+        222
+      ]
+    },
+    {
+      "label": "WBC",
+      "name": "inRange",
+      "version": "1.0.1",
+      "properties": {
+        "value": "${streamdata.wbc}",
+        "lowerLimit": "4000",
+        "upperLimit": "8000"
+      },
+      "resource": "$",
+      "position": [
+        182,
+        87
+      ]
+    },
+    {
+      "label": "call",
+      "name": "TwilioCall",
+      "version": "1.0.1",
+      "properties": {
+        "TWILIO_AUTH_TOKEN": "${vault.TWILIO_AUTH_TOKEN}",
+        "to": "${task.resource.meta.nurse.phone}",
+        "from": "${vault.TWILIO_PHONE}",
+        "message": "alert, alert, Sepsis Shock for the patient ${task.resource.meta.name}",
+        "TWILIO_ACCOUNT_SID": "${vault.TWILIO_ACCOUNT_SID}"
+      },
+      "position": [
+        1029,
+        450
+      ]
+    },
+    {
+      "label": "heartRate",
+      "name": "inRange",
+      "version": "1.0.1",
+      "properties": {
+        "value": "${streamdata.heart_rate}",
+        "lowerLimit": "60",
+        "upperLimit": "90"
+      },
+      "resource": "$",
+      "position": [
+        49,
+        256
+      ]
+    },
+    {
+      "label": "medical_1",
+      "name": "condition",
+      "version": "1.1.6",
+      "properties": {
+        "patient": "${streamdata.infection}",
+        "condition": "${streamdata.condition} === \"Infection\""
+      },
+      "resource": "$",
+      "position": [
+        407,
+        139
+      ]
+    },
+    {
+      "label": "respiratoryRate",
+      "name": "inRange",
+      "version": "1.0.1",
+      "properties": {
+        "value": "${streamdata.respiratory_rate}",
+        "lowerLimit": "12",
+        "upperLimit": "20"
+      },
+      "resource": "$",
+      "position": [
+        45,
+        475
+      ]
+    },
+    {
+      "label": "temperature",
+      "name": "inRange",
+      "version": "1.0.1",
+      "properties": {
+        "value": "${streamdata.temperature}",
+        "lowerLimit": "36",
+        "upperLimit": "38"
+      },
+      "resource": "$",
+      "position": [
+        51,
+        152
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "label": "SevereSepsis",
+      "type": "AND",
+      "parentLabels": [
+        "Sepsis",
+        "SBP_Problem"
+      ],
+      "combinations": [
+        [
+          "TRUE",
+          "TRUE"
+        ]
+      ],
+      "position": [
+        653,
+        532
+      ]
+    },
+    {
+      "label": "SIRS",
+      "type": "GENERAL",
+      "parentLabels": [
+        "PaC02OrRespRateIssue",
+        "temperature",
+        "WBC",
+        "heartRate"
+      ],
+      "combinations": [
+        [
+          "TRUE",
+          "In Range",
+          "In Range",
+          "Above"
+        ],
+        [
+          "TRUE",
+          "In Range",
+          "Below",
+          "In Range"
+        ],
+        [
+          "TRUE",
+          "In Range",
+          "Below",
+          "Below"
+        ],
+        [
+          "TRUE",
+          "In Range",
+          "Below",
+          "Above"
+        ],
+        [
+          "TRUE",
+          "In Range",
+          "Above",
+          "In Range"
+        ],
+        [
+          "TRUE",
+          "In Range",
+          "Above",
+          "Below"
+        ],
+        [
+          "TRUE",
+          "In Range",
+          "Above",
+          "Above"
+        ],
+        [
+          "TRUE",
+          "Below",
+          "In Range",
+          "In Range"
+        ],
+        [
+          "TRUE",
+          "Below",
+          "In Range",
+          "Below"
+        ],
+        [
+          "TRUE",
+          "Below",
+          "In Range",
+          "Above"
+        ],
+        [
+          "TRUE",
+          "Below",
+          "Below",
+          "In Range"
+        ],
+        [
+          "TRUE",
+          "Below",
+          "Below",
+          "Below"
+        ],
+        [
+          "TRUE",
+          "Below",
+          "Below",
+          "Above"
+        ],
+        [
+          "TRUE",
+          "Below",
+          "Above",
+          "In Range"
+        ],
+        [
+          "TRUE",
+          "Below",
+          "Above",
+          "Below"
+        ],
+        [
+          "TRUE",
+          "Below",
+          "Above",
+          "Above"
+        ],
+        [
+          "TRUE",
+          "Above",
+          "In Range",
+          "In Range"
+        ],
+        [
+          "TRUE",
+          "Above",
+          "In Range",
+          "Below"
+        ],
+        [
+          "TRUE",
+          "Above",
+          "In Range",
+          "Above"
+        ],
+        [
+          "TRUE",
+          "Above",
+          "Below",
+          "In Range"
+        ],
+        [
+          "TRUE",
+          "Above",
+          "Below",
+          "Below"
+        ],
+        [
+          "TRUE",
+          "Above",
+          "Below",
+          "Above"
+        ],
+        [
+          "TRUE",
+          "Above",
+          "Above",
+          "In Range"
+        ],
+        [
+          "TRUE",
+          "Above",
+          "Above",
+          "Below"
+        ],
+        [
+          "TRUE",
+          "Above",
+          "Above",
+          "Above"
+        ],
+        [
+          "FALSE",
+          "In Range",
+          "Below",
+          "Above"
+        ],
+        [
+          "FALSE",
+          "In Range",
+          "Above",
+          "Above"
+        ],
+        [
+          "FALSE",
+          "Below",
+          "In Range",
+          "Below"
+        ],
+        [
+          "FALSE",
+          "Below",
+          "In Range",
+          "Above"
+        ],
+        [
+          "FALSE",
+          "Below",
+          "Below",
+          "In Range"
+        ],
+        [
+          "FALSE",
+          "Below",
+          "Below",
+          "Below"
+        ],
+        [
+          "FALSE",
+          "Below",
+          "Below",
+          "Above"
+        ],
+        [
+          "FALSE",
+          "Below",
+          "Above",
+          "In Range"
+        ],
+        [
+          "FALSE",
+          "Below",
+          "Above",
+          "Below"
+        ],
+        [
+          "FALSE",
+          "Below",
+          "Above",
+          "Above"
+        ],
+        [
+          "FALSE",
+          "Above",
+          "In Range",
+          "Above"
+        ],
+        [
+          "FALSE",
+          "Above",
+          "Below",
+          "In Range"
+        ],
+        [
+          "FALSE",
+          "Above",
+          "Below",
+          "Below"
+        ],
+        [
+          "FALSE",
+          "Above",
+          "Below",
+          "Above"
+        ],
+        [
+          "FALSE",
+          "Above",
+          "Above",
+          "In Range"
+        ],
+        [
+          "FALSE",
+          "Above",
+          "Above",
+          "Below"
+        ],
+        [
+          "FALSE",
+          "Above",
+          "Above",
+          "Above"
+        ]
+      ],
+      "position": [
+        342,
+        321
+      ]
+    },
+    {
+      "label": "SBP_Problem",
+      "type": "OR",
+      "parentLabels": [
+        "SBP_DROP",
+        "SBP"
+      ],
+      "combinations": [
+        [
+          "Above",
+          "Below"
+        ]
+      ],
+      "position": [
+        227,
+        676
+      ]
+    },
+    {
+      "label": "Sepsis",
+      "type": "AND",
+      "parentLabels": [
+        "SIRS",
+        "medical_1"
+      ],
+      "combinations": [
+        [
+          "TRUE",
+          "True"
+        ]
+      ],
+      "position": [
+        555,
+        299
+      ]
+    },
+    {
+      "label": "PaC02OrRespRateIssue",
+      "type": "OR",
+      "parentLabels": [
+        "respiratoryRate",
+        "PaC02"
+      ],
+      "combinations": [
+        [
+          "Above",
+          "Below"
+        ]
+      ],
+      "position": [
+        233,
+        372
+      ]
+    },
+    {
+      "label": "SepsisShock",
+      "type": "AND",
+      "parentLabels": [
+        "SevereSepsis",
+        "Hypertension"
+      ],
+      "combinations": [
+        [
+          "TRUE",
+          "Above"
+        ]
+      ],
+      "position": [
+        743,
+        415
+      ]
+    }
+  ],
+  "triggers": [
+    {
+      "sourceLabel": "SBP_Problem",
+      "destinationLabel": "AlarmSBP",
+      "stateChangeTrigger": {
+        "stateFrom": "*",
+        "stateTo": "TRUE"
+      }
+    },
+    {
+      "sourceLabel": "SepsisShock",
+      "destinationLabel": "SeptickShock",
+      "stateChangeTrigger": {
+        "stateFrom": "*",
+        "stateTo": "TRUE"
+      }
+    },
+    {
+      "sourceLabel": "SIRS",
+      "destinationLabel": "SIRSAlarm",
+      "stateChangeTrigger": {
+        "stateFrom": "*",
+        "stateTo": "TRUE"
+      }
+    },
+    {
+      "sourceLabel": "SepsisShock",
+      "destinationLabel": "call",
+      "stateChangeTrigger": {
+        "stateFrom": "*",
+        "stateTo": "TRUE"
+      }
+    }
+  ],
+  "name": "SepticShock",
+  "user": "veselin.pizurica@gmail.com",
+  "createTime": 1619777158781,
+  "lastUpdateTime": 1619777496074,
+  "metadata": {
+    "infoBoxes": [
+      {
+        "x": 393,
+        "y": 243,
+        "text": "SIRS criteria"
+      },
+      {
+        "x": 858,
+        "y": 66,
+        "text": "Implementation of the Septic shock \nhttps://www.mdcalc.com/sirs-sepsis-septic-shock-criteria"
+      },
+      {
+        "x": 871,
+        "y": 707,
+        "text": "Run the template in the reactive mode, and send data in format:\n{\n\"temperature\":36.5\n\"heart_rate\":70\n\"PaC02\":80\n\"respiratory_rate\":14\n\"wbc\":11000\n\"sbp\":80\n\"ht\":30\n}"
+      }
+    ]
+  },
+  "simplifiedGraph": {
+    "sensors": [
+      {
+        "label": "AlarmSBP",
+        "name": "createAlarm",
+        "version": "1.0.1",
+        "properties": {
+          "text": "SBP drop",
+          "severity": "MAJOR",
+          "type": "SBP drop",
+          "resource": "${task.RESOURCE}"
+        },
+        "position": [
+          390,
+          535
+        ],
+        "dataTrigger": false,
+        "tickTrigger": false
+      },
+      {
+        "label": "Hypertension",
+        "name": "inRange",
+        "version": "1.0.1",
+        "properties": {
+          "value": "${streamdata.ht}",
+          "lowerLimit": "23",
+          "upperLimit": "29"
+        },
+        "resource": "$",
+        "position": [
+          516,
+          61
+        ],
+        "dataTrigger": true,
+        "tickTrigger": false
+      },
+      {
+        "label": "PaC02",
+        "name": "inRange",
+        "version": "1.0.1",
+        "properties": {
+          "value": "${streamdata.PaC02}",
+          "lowerLimit": "20",
+          "upperLimit": "32"
+        },
+        "resource": "$",
+        "position": [
+          37,
+          368
+        ],
+        "dataTrigger": true,
+        "tickTrigger": false
+      },
+      {
+        "label": "SBP",
+        "name": "inRange",
+        "version": "1.0.1",
+        "properties": {
+          "value": "${streamdata.sbp}",
+          "lowerLimit": "85",
+          "upperLimit": "90"
+        },
+        "resource": "$",
+        "position": [
+          27,
+          702
+        ],
+        "dataTrigger": true,
+        "tickTrigger": false
+      },
+      {
+        "label": "SBP_DROP",
+        "name": "Function",
+        "version": "1.0.1",
+        "properties": {
+          "formula": "<GLOBAL.sbp>[-1] - <GLOBAL.sbp>",
+          "threshold": "40"
+        },
+        "position": [
+          2,
+          608
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      },
+      {
+        "label": "SIRSAlarm",
+        "name": "createAlarm",
+        "version": "1.0.1",
+        "properties": {
+          "text": "SIRS criteria met",
+          "severity": "MAJOR",
+          "type": "SIRS",
+          "resource": "${task.RESOURCE}"
+        },
+        "position": [
+          504,
+          460
+        ],
+        "dataTrigger": false,
+        "tickTrigger": false
+      },
+      {
+        "label": "SeptickShock",
+        "name": "createAlarm",
+        "version": "1.0.1",
+        "properties": {
+          "resource": "${task.RESOURCE}",
+          "text": "SeptickShock alert",
+          "severity": "CRITICAL",
+          "type": "SepsisShock"
+        },
+        "position": [
+          982,
+          222
+        ],
+        "dataTrigger": false,
+        "tickTrigger": false
+      },
+      {
+        "label": "WBC",
+        "name": "inRange",
+        "version": "1.0.1",
+        "properties": {
+          "value": "${streamdata.wbc}",
+          "lowerLimit": "4000",
+          "upperLimit": "8000"
+        },
+        "resource": "$",
+        "position": [
+          182,
+          87
+        ],
+        "dataTrigger": true,
+        "tickTrigger": false
+      },
+      {
+        "label": "call",
+        "name": "TwilioCall",
+        "version": "1.0.1",
+        "properties": {
+          "TWILIO_AUTH_TOKEN": "${vault.TWILIO_AUTH_TOKEN}",
+          "to": "${task.resource.meta.nurse.phone}",
+          "from": "${vault.TWILIO_PHONE}",
+          "message": "alert, alert, Sepsis Shock for the patient ${task.resource.meta.name}",
+          "TWILIO_ACCOUNT_SID": "${vault.TWILIO_ACCOUNT_SID}"
+        },
+        "sequence": 1,
+        "position": [
+          1029,
+          450
+        ],
+        "dataTrigger": false,
+        "tickTrigger": false
+      },
+      {
+        "label": "heartRate",
+        "name": "inRange",
+        "version": "1.0.1",
+        "properties": {
+          "value": "${streamdata.heart_rate}",
+          "lowerLimit": "60",
+          "upperLimit": "90"
+        },
+        "resource": "$",
+        "position": [
+          49,
+          256
+        ],
+        "dataTrigger": true,
+        "tickTrigger": false
+      },
+      {
+        "label": "medical_1",
+        "name": "condition",
+        "version": "1.1.6",
+        "properties": {
+          "patient": "${streamdata.infection}",
+          "condition": "${streamdata.condition} === \"Infection\""
+        },
+        "resource": "$",
+        "position": [
+          407,
+          139
+        ],
+        "dataTrigger": false,
+        "tickTrigger": true
+      },
+      {
+        "label": "respiratoryRate",
+        "name": "inRange",
+        "version": "1.0.1",
+        "properties": {
+          "value": "${streamdata.respiratory_rate}",
+          "lowerLimit": "12",
+          "upperLimit": "20"
+        },
+        "resource": "$",
+        "position": [
+          45,
+          475
+        ],
+        "dataTrigger": true,
+        "tickTrigger": false
+      },
+      {
+        "label": "temperature",
+        "name": "inRange",
+        "version": "1.0.1",
+        "properties": {
+          "value": "${streamdata.temperature}",
+          "lowerLimit": "36",
+          "upperLimit": "38"
+        },
+        "resource": "$",
+        "position": [
+          51,
+          152
+        ],
+        "dataTrigger": true,
+        "tickTrigger": false
+      }
+    ],
+    "actuators": [],
+    "relations": [
+      {
+        "label": "PaC02OrRespRateIssue",
+        "type": "OR",
+        "parentLabels": [
+          "respiratoryRate",
+          "PaC02"
+        ],
+        "combinations": [
+          [
+            "Above",
+            "Below"
+          ]
+        ],
+        "position": [
+          233,
+          372
+        ]
+      },
+      {
+        "label": "SBP_Problem",
+        "type": "OR",
+        "parentLabels": [
+          "SBP_DROP",
+          "SBP"
+        ],
+        "combinations": [
+          [
+            "Above",
+            "Below"
+          ]
+        ],
+        "position": [
+          227,
+          676
+        ]
+      },
+      {
+        "label": "SIRS",
+        "type": "GENERAL",
+        "parentLabels": [
+          "PaC02OrRespRateIssue",
+          "temperature",
+          "WBC",
+          "heartRate"
+        ],
+        "combinations": [
+          [
+            "TRUE",
+            "In Range",
+            "In Range",
+            "Above"
+          ],
+          [
+            "TRUE",
+            "In Range",
+            "Below",
+            "In Range"
+          ],
+          [
+            "TRUE",
+            "In Range",
+            "Below",
+            "Below"
+          ],
+          [
+            "TRUE",
+            "In Range",
+            "Below",
+            "Above"
+          ],
+          [
+            "TRUE",
+            "In Range",
+            "Above",
+            "In Range"
+          ],
+          [
+            "TRUE",
+            "In Range",
+            "Above",
+            "Below"
+          ],
+          [
+            "TRUE",
+            "In Range",
+            "Above",
+            "Above"
+          ],
+          [
+            "TRUE",
+            "Below",
+            "In Range",
+            "In Range"
+          ],
+          [
+            "TRUE",
+            "Below",
+            "In Range",
+            "Below"
+          ],
+          [
+            "TRUE",
+            "Below",
+            "In Range",
+            "Above"
+          ],
+          [
+            "TRUE",
+            "Below",
+            "Below",
+            "In Range"
+          ],
+          [
+            "TRUE",
+            "Below",
+            "Below",
+            "Below"
+          ],
+          [
+            "TRUE",
+            "Below",
+            "Below",
+            "Above"
+          ],
+          [
+            "TRUE",
+            "Below",
+            "Above",
+            "In Range"
+          ],
+          [
+            "TRUE",
+            "Below",
+            "Above",
+            "Below"
+          ],
+          [
+            "TRUE",
+            "Below",
+            "Above",
+            "Above"
+          ],
+          [
+            "TRUE",
+            "Above",
+            "In Range",
+            "In Range"
+          ],
+          [
+            "TRUE",
+            "Above",
+            "In Range",
+            "Below"
+          ],
+          [
+            "TRUE",
+            "Above",
+            "In Range",
+            "Above"
+          ],
+          [
+            "TRUE",
+            "Above",
+            "Below",
+            "In Range"
+          ],
+          [
+            "TRUE",
+            "Above",
+            "Below",
+            "Below"
+          ],
+          [
+            "TRUE",
+            "Above",
+            "Below",
+            "Above"
+          ],
+          [
+            "TRUE",
+            "Above",
+            "Above",
+            "In Range"
+          ],
+          [
+            "TRUE",
+            "Above",
+            "Above",
+            "Below"
+          ],
+          [
+            "TRUE",
+            "Above",
+            "Above",
+            "Above"
+          ],
+          [
+            "FALSE",
+            "In Range",
+            "Below",
+            "Above"
+          ],
+          [
+            "FALSE",
+            "In Range",
+            "Above",
+            "Above"
+          ],
+          [
+            "FALSE",
+            "Below",
+            "In Range",
+            "Below"
+          ],
+          [
+            "FALSE",
+            "Below",
+            "In Range",
+            "Above"
+          ],
+          [
+            "FALSE",
+            "Below",
+            "Below",
+            "In Range"
+          ],
+          [
+            "FALSE",
+            "Below",
+            "Below",
+            "Below"
+          ],
+          [
+            "FALSE",
+            "Below",
+            "Below",
+            "Above"
+          ],
+          [
+            "FALSE",
+            "Below",
+            "Above",
+            "In Range"
+          ],
+          [
+            "FALSE",
+            "Below",
+            "Above",
+            "Below"
+          ],
+          [
+            "FALSE",
+            "Below",
+            "Above",
+            "Above"
+          ],
+          [
+            "FALSE",
+            "Above",
+            "In Range",
+            "Above"
+          ],
+          [
+            "FALSE",
+            "Above",
+            "Below",
+            "In Range"
+          ],
+          [
+            "FALSE",
+            "Above",
+            "Below",
+            "Below"
+          ],
+          [
+            "FALSE",
+            "Above",
+            "Below",
+            "Above"
+          ],
+          [
+            "FALSE",
+            "Above",
+            "Above",
+            "In Range"
+          ],
+          [
+            "FALSE",
+            "Above",
+            "Above",
+            "Below"
+          ],
+          [
+            "FALSE",
+            "Above",
+            "Above",
+            "Above"
+          ],
+          [
+            "TRUE",
+            "In Range",
+            "In Range",
+            "Above"
+          ],
+          [
+            "TRUE",
+            "In Range",
+            "Below",
+            "In Range"
+          ],
+          [
+            "TRUE",
+            "In Range",
+            "Below",
+            "Below"
+          ],
+          [
+            "TRUE",
+            "In Range",
+            "Below",
+            "Above"
+          ],
+          [
+            "TRUE",
+            "In Range",
+            "Above",
+            "In Range"
+          ],
+          [
+            "TRUE",
+            "In Range",
+            "Above",
+            "Below"
+          ],
+          [
+            "TRUE",
+            "In Range",
+            "Above",
+            "Above"
+          ],
+          [
+            "TRUE",
+            "Below",
+            "In Range",
+            "In Range"
+          ],
+          [
+            "TRUE",
+            "Below",
+            "In Range",
+            "Below"
+          ],
+          [
+            "TRUE",
+            "Below",
+            "In Range",
+            "Above"
+          ],
+          [
+            "TRUE",
+            "Below",
+            "Below",
+            "In Range"
+          ],
+          [
+            "TRUE",
+            "Below",
+            "Below",
+            "Below"
+          ],
+          [
+            "TRUE",
+            "Below",
+            "Below",
+            "Above"
+          ],
+          [
+            "TRUE",
+            "Below",
+            "Above",
+            "In Range"
+          ],
+          [
+            "TRUE",
+            "Below",
+            "Above",
+            "Below"
+          ],
+          [
+            "TRUE",
+            "Below",
+            "Above",
+            "Above"
+          ],
+          [
+            "TRUE",
+            "Above",
+            "In Range",
+            "In Range"
+          ],
+          [
+            "TRUE",
+            "Above",
+            "In Range",
+            "Below"
+          ],
+          [
+            "TRUE",
+            "Above",
+            "In Range",
+            "Above"
+          ],
+          [
+            "TRUE",
+            "Above",
+            "Below",
+            "In Range"
+          ],
+          [
+            "TRUE",
+            "Above",
+            "Below",
+            "Below"
+          ],
+          [
+            "TRUE",
+            "Above",
+            "Below",
+            "Above"
+          ],
+          [
+            "TRUE",
+            "Above",
+            "Above",
+            "In Range"
+          ],
+          [
+            "TRUE",
+            "Above",
+            "Above",
+            "Below"
+          ],
+          [
+            "TRUE",
+            "Above",
+            "Above",
+            "Above"
+          ],
+          [
+            "FALSE",
+            "In Range",
+            "Below",
+            "Above"
+          ],
+          [
+            "FALSE",
+            "In Range",
+            "Above",
+            "Above"
+          ],
+          [
+            "FALSE",
+            "Below",
+            "In Range",
+            "Below"
+          ],
+          [
+            "FALSE",
+            "Below",
+            "In Range",
+            "Above"
+          ],
+          [
+            "FALSE",
+            "Below",
+            "Below",
+            "In Range"
+          ],
+          [
+            "FALSE",
+            "Below",
+            "Below",
+            "Below"
+          ],
+          [
+            "FALSE",
+            "Below",
+            "Below",
+            "Above"
+          ],
+          [
+            "FALSE",
+            "Below",
+            "Above",
+            "In Range"
+          ],
+          [
+            "FALSE",
+            "Below",
+            "Above",
+            "Below"
+          ],
+          [
+            "FALSE",
+            "Below",
+            "Above",
+            "Above"
+          ],
+          [
+            "FALSE",
+            "Above",
+            "In Range",
+            "Above"
+          ],
+          [
+            "FALSE",
+            "Above",
+            "Below",
+            "In Range"
+          ],
+          [
+            "FALSE",
+            "Above",
+            "Below",
+            "Below"
+          ],
+          [
+            "FALSE",
+            "Above",
+            "Below",
+            "Above"
+          ],
+          [
+            "FALSE",
+            "Above",
+            "Above",
+            "In Range"
+          ],
+          [
+            "FALSE",
+            "Above",
+            "Above",
+            "Below"
+          ],
+          [
+            "FALSE",
+            "Above",
+            "Above",
+            "Above"
+          ]
+        ],
+        "position": [
+          342,
+          321
+        ]
+      },
+      {
+        "label": "Sepsis",
+        "type": "AND",
+        "parentLabels": [
+          "SIRS",
+          "medical_1"
+        ],
+        "combinations": [
+          [
+            "TRUE",
+            "True"
+          ]
+        ],
+        "position": [
+          555,
+          299
+        ]
+      },
+      {
+        "label": "SepsisShock",
+        "type": "AND",
+        "parentLabels": [
+          "SevereSepsis",
+          "Hypertension"
+        ],
+        "combinations": [
+          [
+            "TRUE",
+            "Above"
+          ]
+        ],
+        "position": [
+          743,
+          415
+        ]
+      },
+      {
+        "label": "SevereSepsis",
+        "type": "AND",
+        "parentLabels": [
+          "Sepsis",
+          "SBP_Problem"
+        ],
+        "combinations": [
+          [
+            "TRUE",
+            "TRUE"
+          ]
+        ],
+        "position": [
+          653,
+          532
+        ]
+      }
+    ],
+    "triggers": [
+      {
+        "sourceLabel": "SBP_Problem",
+        "destinationLabel": "AlarmSBP",
+        "invocationPolicy": 0,
+        "stateChangeTrigger": {
+          "stateFrom": "*",
+          "stateTo": "TRUE"
+        }
+      },
+      {
+        "sourceLabel": "SIRS",
+        "destinationLabel": "SIRSAlarm",
+        "invocationPolicy": 0,
+        "stateChangeTrigger": {
+          "stateFrom": "*",
+          "stateTo": "TRUE"
+        }
+      },
+      {
+        "sourceLabel": "SepsisShock",
+        "destinationLabel": "SeptickShock",
+        "invocationPolicy": 0,
+        "stateChangeTrigger": {
+          "stateFrom": "*",
+          "stateTo": "TRUE"
+        }
+      },
+      {
+        "sourceLabel": "SepsisShock",
+        "destinationLabel": "call",
+        "invocationPolicy": 0,
+        "stateChangeTrigger": {
+          "stateFrom": "*",
+          "stateTo": "TRUE"
+        }
+      }
+    ]
+  },
+  "discoveryTemplate": false,
+  "notes": [
+    {
+      "position": [
+        393,
+        243
+      ],
+      "text": "SIRS criteria"
+    },
+    {
+      "position": [
+        858,
+        66
+      ],
+      "text": "Implementation of the Septic shock \nhttps://www.mdcalc.com/sirs-sepsis-septic-shock-criteria"
+    },
+    {
+      "position": [
+        871,
+        707
+      ],
+      "text": "Run the template in the reactive mode, and send data in format:\n{\n\"temperature\":36.5\n\"heart_rate\":70\n\"PaC02\":80\n\"respiratory_rate\":14\n\"wbc\":11000\n\"sbp\":80\n\"ht\":30\n}"
+    }
+  ]
+}
