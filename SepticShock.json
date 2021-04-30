@@ -154,8 +154,7 @@
       "name": "condition",
       "version": "1.1.6",
       "properties": {
-        "patient": "${streamdata.infection}",
-        "condition": "${streamdata.condition} === \"Infection\""
+        "condition": "\"${streamdata.condition}\" === \"Infection\""
       },
       "resource": "$",
       "position": [
@@ -556,14 +555,6 @@
   ],
   "triggers": [
     {
-      "sourceLabel": "SBP_Problem",
-      "destinationLabel": "AlarmSBP",
-      "stateChangeTrigger": {
-        "stateFrom": "*",
-        "stateTo": "TRUE"
-      }
-    },
-    {
       "sourceLabel": "SepsisShock",
       "destinationLabel": "SeptickShock",
       "stateChangeTrigger": {
@@ -574,6 +565,14 @@
     {
       "sourceLabel": "SIRS",
       "destinationLabel": "SIRSAlarm",
+      "stateChangeTrigger": {
+        "stateFrom": "*",
+        "stateTo": "TRUE"
+      }
+    },
+    {
+      "sourceLabel": "SBP_Problem",
+      "destinationLabel": "AlarmSBP",
       "stateChangeTrigger": {
         "stateFrom": "*",
         "stateTo": "TRUE"
@@ -591,7 +590,7 @@
   "name": "SepticShock",
   "user": "veselin.pizurica@gmail.com",
   "createTime": 1619777158781,
-  "lastUpdateTime": 1619777496074,
+  "lastUpdateTime": 1619811955785,
   "metadata": {
     "infoBoxes": [
       {
@@ -626,9 +625,7 @@
         "position": [
           390,
           535
-        ],
-        "dataTrigger": false,
-        "tickTrigger": false
+        ]
       },
       {
         "label": "Hypertension",
@@ -643,9 +640,7 @@
         "position": [
           516,
           61
-        ],
-        "dataTrigger": true,
-        "tickTrigger": false
+        ]
       },
       {
         "label": "PaC02",
@@ -660,9 +655,7 @@
         "position": [
           37,
           368
-        ],
-        "dataTrigger": true,
-        "tickTrigger": false
+        ]
       },
       {
         "label": "SBP",
@@ -677,9 +670,7 @@
         "position": [
           27,
           702
-        ],
-        "dataTrigger": true,
-        "tickTrigger": false
+        ]
       },
       {
         "label": "SBP_DROP",
@@ -692,9 +683,7 @@
         "position": [
           2,
           608
-        ],
-        "dataTrigger": false,
-        "tickTrigger": true
+        ]
       },
       {
         "label": "SIRSAlarm",
@@ -709,9 +698,7 @@
         "position": [
           504,
           460
-        ],
-        "dataTrigger": false,
-        "tickTrigger": false
+        ]
       },
       {
         "label": "SeptickShock",
@@ -726,9 +713,7 @@
         "position": [
           982,
           222
-        ],
-        "dataTrigger": false,
-        "tickTrigger": false
+        ]
       },
       {
         "label": "WBC",
@@ -743,9 +728,7 @@
         "position": [
           182,
           87
-        ],
-        "dataTrigger": true,
-        "tickTrigger": false
+        ]
       },
       {
         "label": "call",
@@ -758,13 +741,10 @@
           "message": "alert, alert, Sepsis Shock for the patient ${task.resource.meta.name}",
           "TWILIO_ACCOUNT_SID": "${vault.TWILIO_ACCOUNT_SID}"
         },
-        "sequence": 1,
         "position": [
           1029,
           450
-        ],
-        "dataTrigger": false,
-        "tickTrigger": false
+        ]
       },
       {
         "label": "heartRate",
@@ -779,25 +759,23 @@
         "position": [
           49,
           256
-        ],
-        "dataTrigger": true,
-        "tickTrigger": false
+        ]
       },
       {
         "label": "medical_1",
         "name": "condition",
         "version": "1.1.6",
         "properties": {
-          "patient": "${streamdata.infection}",
-          "condition": "${streamdata.condition} === \"Infection\""
+          "condition": "\"${streamdata.condition}\" === \"Infection\""
         },
         "resource": "$",
+        "sequence": 1,
         "position": [
           407,
           139
         ],
-        "dataTrigger": false,
-        "tickTrigger": true
+        "dataTrigger": true,
+        "tickTrigger": false
       },
       {
         "label": "respiratoryRate",
@@ -812,9 +790,7 @@
         "position": [
           45,
           475
-        ],
-        "dataTrigger": true,
-        "tickTrigger": false
+        ]
       },
       {
         "label": "temperature",
@@ -829,9 +805,7 @@
         "position": [
           51,
           152
-        ],
-        "dataTrigger": true,
-        "tickTrigger": false
+        ]
       }
     ],
     "actuators": [],
